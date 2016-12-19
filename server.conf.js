@@ -69,15 +69,11 @@ app.use(methodOverride('X-HTTP-Method-Override'));
 // Set the static files location /public/img will be /img for users
 app.use(express.static(__dirname + '/dist'));
 
-// ## Passport JS
+let router = express.Router();
 
-app.get('*', (req, res) => {
+import routes from './backend/routes';
 
-  // Load our src/app.html file
-  //** Note that the root is set to the parent of this folder, ie the app root **
-  res.sendFile('/dist/index.html', {root: __dirname + "/../"});
-});
-
+routes(app, router, passport, jwt);
 
 server.listen(port);
 
