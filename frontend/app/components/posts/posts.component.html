@@ -1,3 +1,11 @@
 <p>
   posts works!
 </p>
+<ul>
+  <li *ngFor="let post of posts">
+    <strong>{{post.title}}</strong>
+    <p>
+      {{post.content}}
+    </p>
+  </li>
+</ul>
