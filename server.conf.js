@@ -15,9 +15,11 @@
 //  - Define routes for our frontend Angular application
 //  - Set the app to listen on a port so we can view it in our browser
 
-// # Node Env Variables
-
 // Load Node environment variable configuration file
+import {validateEnvVariables} from './config/env.conf.js';
+
+// Set up appropriate environment variables if necessary
+validateEnvVariables();
 
 // # Modules
 
@@ -29,6 +31,8 @@ import http from 'http';
 let app = express();
 // Create a Node server for our Express app
 let server = http.createServer(app);
+// Load Mongoose for MongoDB interactions
+import mongoose from 'mongoose';
 // Log requests to the console (Express 4)
 import morgan from 'morgan';
 // Pull information from HTML POST (express 4)
@@ -46,6 +50,12 @@ import jwt from 'jsonwebtoken';
 
 // Set the port for this app
 let port = process.env.PORT || 8080;
+
+// Load Mongoose config file for connecting to MongoDB instance
+import mongooseConf from './config/mongoose.conf.js';
+
+// Pass Mongoose configuration Mongoose instance
+mongooseConf(mongoose);
 
 if (process.env.NODE_ENV === 'development' ||
   process.env.NODE_ENV === 'test')
