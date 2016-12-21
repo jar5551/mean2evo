@@ -1,11 +1,15 @@
-# Projectname
+# Mongo + ExpressJS (ES6) + Angular2 (TS) + Node Starter Pack
 
-This project was generated with [angular-cli](https://github.com/angular/angular-cli) version 1.0.0-beta.22-1.
+This is MEA2N starter pack with Angular2 with angular-cli. 
+
+## How to install and requirments
+Firstly you have to clone this repo.
+Then install all dependencies with `npm install`. You will also need to install angular cli  `npm install -g angular-cli`. To run backend devlopment server you have to install gulp `npm install --global gulp-cli`
 
 ## Development server
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Run `npm start` for a dev frontentd server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files. Run `gulp` for a development backend server. 
 
-## Code scaffolding
+## Angular 2 code scaffolding
 
 Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive/pipe/service/class`.
 
