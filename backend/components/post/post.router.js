@@ -8,22 +8,11 @@ export default (app, router) => {
   router.route('/posts')
     .get((req, res) => {
 
-
-      Post.list().then((res) => {
-        console.log(res);
-
-      });
-
-      /*Post.find((err, posts) => {
-        if (err)
-          res.send(err);
-
-        else
-          res.json(posts);
-      });*/
-
-      res.json({e: 'a'});
-
+      Post.find().then(posts => {
+        res.json(posts);
+      }).catch(err => {
+        res.send(err);
+      })
     })
 
     .post((req, res) => {
@@ -36,16 +25,11 @@ export default (app, router) => {
         })
       }
 
-      posts.forEach(function (element) {
-        Post.create({
-          title: element.title,
-          content: element.content
-        }, (err, todo) => {
-          if (err)
-            res.send(err);
-
-          console.log(`Todo created: ${todo}`);
-        });
+      Post.create(posts).then(posts => {
+        console.log('created', posts);
+        return res.send(posts);
+      }).catch(err => {
+        return res.send(err);
       });
     });
 }
