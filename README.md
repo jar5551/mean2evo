@@ -1,6 +1,6 @@
 # Mongo + ExpressJS (ES6) + Angular2 (TS) + Node Starter Pack
 
-This is MEA2N starter pack with Angular2 with angular-cli. 
+This is MEA2N starter pack with Angular2 with angular-cli on front and ExpressJS in ES6 on back. Features socket.io integration, Mongo with Mongoose and tests (WIP).
 
 ## How to install and requirments
 Firstly you have to clone this repo.
