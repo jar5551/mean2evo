@@ -20,6 +20,8 @@ export default (mongoose) => {
     });
   };
 
+  mongoose.Promise = Promise;
+
   mongoose.connection.on("connected", (ref) => {
 
     console.log(`Successfully connected to ${process.env.NODE_ENV}` +

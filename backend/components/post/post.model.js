@@ -8,13 +8,6 @@ let postSchema = new mongoose.Schema({
   content: { type : String }
 });
 
-postSchema.methods = {
-  list: function () {
-    return this.find()
-      .exec();
-  }
-};
-
 // Expose the model so that it can be imported and used in
 // the controller (to search, delete, etc.)
 export default mongoose.model('Post', postSchema);
