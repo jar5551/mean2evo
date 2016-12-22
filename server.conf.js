@@ -25,12 +25,16 @@ validateEnvVariables();
 
 // Load Express
 import express from 'express';
+// Load Socket.io
+import socketio from 'socket.io';
 // Load Node http module
 import http from 'http';
 // Create our app with Express
 let app = express();
 // Create a Node server for our Express app
 let server = http.createServer(app);
+// Integrate Socket.io
+let io = socketio.listen(server);
 // Load Mongoose for MongoDB interactions
 import mongoose from 'mongoose';
 // Log requests to the console (Express 4)
@@ -47,6 +51,11 @@ import passportJWT from 'passport-jwt';
 import jwt from 'jsonwebtoken';
 
 // # Configuration
+
+// Load Socket.io server functionality
+import base from './backend/sockets/base.socket';
+
+base(io);
 
 // Set the port for this app
 let port = process.env.PORT || 8080;
