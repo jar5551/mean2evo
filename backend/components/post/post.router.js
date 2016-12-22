@@ -2,18 +2,28 @@
  * Created by jarek on 19/12/2016.
  */
 
-import Post from './../models/post.model';
+import Post from './post.model';
 
 export default (app, router) => {
   router.route('/posts')
     .get((req, res) => {
-      Post.find((err, posts) => {
+
+
+      Post.list().then((res) => {
+        console.log(res);
+
+      });
+
+      /*Post.find((err, posts) => {
         if (err)
           res.send(err);
 
         else
           res.json(posts);
-      });
+      });*/
+
+      res.json({e: 'a'});
+
     })
 
     .post((req, res) => {

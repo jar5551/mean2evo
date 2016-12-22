@@ -1,4 +1,4 @@
-import postRoutes from './routes/post.router';
+import postRoutes from './components/post/post.router';
 
 export default (app, router, passport, jwt) => {
   // ### Express Middlware to use for all requests
