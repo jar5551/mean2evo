@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 
 import {SocketService} from './services/socket.service';
+import {SocketItem} from './models/socket-item.model';
 
 @Component({
   selector: 'app-root',
@@ -11,6 +12,12 @@ import {SocketService} from './services/socket.service';
 export class AppComponent {
   title = 'app works!';
 
-  constructor(private socketService: SocketService) {}
+  constructor(private socketService: SocketService) {
+    this.socketService
+      .get()
+      .subscribe((socketItem: SocketItem) => {
+        console.log('socket');
+      })
+  }
 
 }

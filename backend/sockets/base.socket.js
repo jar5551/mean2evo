@@ -13,5 +13,9 @@ export default (io) => {
 
       console.log('a user disconnected');
     });
+
+    socket.on('list', () => {
+      console.log('list requested');
+    })
   });
 };
