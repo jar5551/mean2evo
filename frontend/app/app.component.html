@@ -1,8 +1,21 @@
+<md-toolbar color="primary">
+  Mongo, ExpressJS, Anular 2, NodeJS - Starter Pack
+</md-toolbar>
+
+<md-input placeholder="login">
+</md-input>
+
 <h1>
   {{title}}
 </h1>
-<app-posts></app-posts>
-<!--
-<md-input-container>
+<!--<app-posts></app-posts>-->
+<a uiSref="posts" uiSrefActive="active">Posts</a>
+
+<button md-button>Basic Button</button>
+<button md-raised-button>Raised Button</button>
+
+<!--<md-input-container>
   <input md-input>
-</md-input-container>ć-->
+</md-input-container>-->
+
+<ui-view></ui-view>
