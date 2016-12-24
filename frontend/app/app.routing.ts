@@ -1,16 +1,27 @@
 /**
  * Created by jarek on 26/11/2016.
  */
-import { PostsComponent } from './components/posts/posts.component';
+import {Routes} from '@angular/router';
 
-let postsState = {
-  name: 'posts',
-  url: '/posts',
-  component: PostsComponent
-};
+import {PostsComponent} from './components/posts/posts.component';
+import {AdminComponent} from './components/admin/admin.component';
+import {AdminLoginComponent} from './components/admin/admin-login/admin-login.component';
+import { ClientHomeComponent } from './components/client/client-home/client-home.component';
 
-
-export const routing = {
-  states: [ postsState ],
-  useHash: false
-};
+export const appRoutes: Routes = [
+  {
+    path: '',
+    component: ClientHomeComponent
+  },
+  {
+    path: 'admin',
+    component: AdminComponent,
+    children: [
+      {
+        path: 'login',
+        component: AdminLoginComponent
+      }
+    ]
+  }
+  //{ path: '**', component: PageNotFoundComponent }
+];
