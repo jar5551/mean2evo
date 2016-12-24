@@ -9,5 +9,8 @@
     -moz-box-shadow: nth($parameters, 1) nth($parameters, 2) nth($parameters, 3) nth($parameters, 4);
     box-shadow: nth($parameters, 1) nth($parameters, 2) nth($parameters, 3) nth($parameters, 4);
   }
+}
 
+@mixin fontSize($_size) {
+  font-size: em($_size);
 }

@@ -1,8 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
 
 @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&subset=latin-ext');
-@import "~@angular/material/core/theming/prebuilt/indigo-pink";
+//@import "~@angular/material/core/theming/prebuilt/indigo-pink";
 @import "./app/shared/styles/main";
+@import "./app/shared/styles/theme/main";
 
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
