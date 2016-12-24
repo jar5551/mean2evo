@@ -3,26 +3,32 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { MaterialModule } from '@angular/material';
-import {UIRouterModule} from "ui-router-ng2";
+import { RouterModule } from '@angular/router';
+import { FlexLayoutModule } from "@angular/flex-layout";
 
 import { AppComponent } from './app.component';
 import { PostsComponent } from './components/posts/posts.component';
 
-import {routing} from './app.routing';
+import {appRoutes} from './app.routing';
+import { AdminComponent } from './components/admin/admin.component';
+import { AdminLoginComponent } from './components/admin/admin-login/admin-login.component';
+import { ClientHomeComponent } from './components/client/client-home/client-home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    PostsComponent
-    //routedComponents
+    PostsComponent,
+    AdminComponent,
+    AdminLoginComponent,
+    ClientHomeComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
     MaterialModule.forRoot(),
-    //routing //TODO implement routing. Consider ui router or angular routing
-    //UIRouterModule.forRoot(routing)
+    FlexLayoutModule.forRoot(),
+    RouterModule.forRoot(appRoutes)
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,0 +1,24 @@
+@import "./../../../shared/styles/main";
+
+.login-container {
+  @include linear-gradient(to right, $cBlue, $cGreen);
+  height: 100%;
+
+  .login-box {
+    @include boxShadow(0 0 em(60) rgba(0, 0, 0 ,.25));
+    @include border-top-radius(10px);
+    @include border-bottom-radius(10px);
+    background-color: $cWhite;
+    height: em(255);
+
+    form {
+      height: 100%;
+      display: block;
+      padding: em(12);
+
+      md-input {
+        width: 100%;
+      }
+    }
+  }
+}
