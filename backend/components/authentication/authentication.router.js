@@ -12,6 +12,4 @@ export default (app, router, passport) => {
     })
   });
 
-
-  //app.use('/auth', router);
 }
