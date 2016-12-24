@@ -1,4 +1,5 @@
 import postRoutes from './components/post/post.router';
+import authenticationRoutes from './components/authentication/authentication.router';
 
 export default (app, router, passport, jwt) => {
   // ### Express Middlware to use for all requests
@@ -11,6 +12,7 @@ export default (app, router, passport, jwt) => {
   });
 
   postRoutes(app, router);
+  authenticationRoutes(app, router, passport);
 
   app.use('/api', router);
 
