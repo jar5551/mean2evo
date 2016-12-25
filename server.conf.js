@@ -66,6 +66,11 @@ import mongooseConf from './config/mongoose.conf.js';
 // Pass Mongoose configuration Mongoose instance
 mongooseConf(mongoose);
 
+// Import PassportJS configuration
+import passportConf from './config/passport.conf.js';
+
+// Pass Passport configuration our PassportJS instance
+passportConf(passport, passportJWT, jwt);
 
 if (process.env.NODE_ENV === 'development' ||
   process.env.NODE_ENV === 'test')
@@ -88,6 +93,8 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(methodOverride('X-HTTP-Method-Override'));
 // Set the static files location /public/img will be /img for users
 app.use(express.static(__dirname + '/dist'));
+
+app.use(passport.initialize());
 
 let router = express.Router();
 
