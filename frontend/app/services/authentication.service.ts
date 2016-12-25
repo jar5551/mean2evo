@@ -10,7 +10,6 @@ export class AuthenticationService {
   constructor(private http: Http) {
     var currentUser = JSON.parse(localStorage.getItem('currentUser'));
     this.token = currentUser && currentUser.token;
-    console.log(currentUser);
   }
 
   login(email: string, password: string) {
@@ -21,10 +20,7 @@ export class AuthenticationService {
         if (token) {
           this.token = token;
 
-          localStorage.setItem('currentUser', JSON.stringify({
-            email: email,
-            token: token
-          }));
+          localStorage.setItem('id_token', token);
 
           return true;
         } else {
@@ -34,9 +30,14 @@ export class AuthenticationService {
       });
   }
 
+  logout() {
+    this.token = null;
+    localStorage.removeItem('id_token');
+
+  }
+
   loggedIn() {
     return tokenNotExpired();
   }
-
 
 }

@@ -17,6 +17,7 @@ import {ClientHomeComponent} from './components/client/client-home/client-home.c
 import {AdminDashboardComponent} from './components/admin/admin-dashboard/admin-dashboard.component';
 
 import {AuthGuardService} from './services/auth-guard.service';
+import {AuthenticationService} from './services/authentication.service';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,8 @@ import {AuthGuardService} from './services/auth-guard.service';
     RouterModule.forRoot(appRoutes)
   ],
   providers: [
+    AuthGuardService,
+    AuthenticationService,
     AUTH_PROVIDERS
   ],
   bootstrap: [AppComponent]

@@ -24,6 +24,7 @@ export const appRoutes: Routes = [
     path: 'admin',
     component: AdminComponent,
     //canActivate: [AuthGuardService],
+    canActivate: [AuthGuardService],
     children: [
       {
         path: 'dashboard',
