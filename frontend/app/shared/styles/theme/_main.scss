@@ -1,4 +1,5 @@
 @import '~@angular/material/core/theming/all-theme';
+@import '~@angular/material/core/theming/prebuilt/deeppurple-amber';
 @import "./../main";
 
 @include md-core();
@@ -7,8 +8,7 @@ $md-indigo: green;
 $md-pink: pink;
 $md-red: red;
 
-/*
-$candy-app-primary: md-palette($md-indigo);
+/*$candy-app-primary: md-palette($md-indigo);
 $candy-app-accent:  md-palette($md-pink, A200, A100, A400);
 
 // The warn palette is optional (defaults to red).
@@ -22,6 +22,7 @@ $candy-app-theme: md-light-theme($candy-app-primary, $candy-app-accent, $candy-a
 // that you are using.
 @include angular-material-theme($candy-app-theme);*/
 
+/*
 [md-raised-button] {
   @include border-top-radius(em(20));
   @include border-bottom-radius(em(20));
@@ -29,4 +30,4 @@ $candy-app-theme: md-light-theme($candy-app-primary, $candy-app-accent, $candy-a
   -moz-box-shadow: none!important;
   box-shadow: none!important;
   height: em(40);
-}
+}*/
