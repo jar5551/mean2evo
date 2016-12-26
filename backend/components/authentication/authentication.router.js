@@ -39,7 +39,20 @@ export default (app, router, passport) => {
     })(req, res, next);
   });
 
-  /*router.get('/auth/me', passport.authenticate('jwt', {session: false}), tokenExtract, (req, res, next) => {
+  router.get('/auth/logout', passport.authenticate('jwt', {session: false}), tokenExtract, (req, res) => {
+    InvalidToken.create({
+      token: req.jwt,
+      expiresAt: parseInt(req.jwtDecode.exp + '000')
+    }, (err, message) => {
+      if (err)
+        res.send(err);
+
+      //res.sendStatus(401);
+      res.json(message);
+    });
+  });
+
+  router.get('/auth/me', passport.authenticate('jwt', {session: false}), tokenExtract, (req, res, next) => {
     let id = req.jwtDecode.id;
 
     User.findById(id, 'username email', (err, user) => {
@@ -50,6 +63,6 @@ export default (app, router, passport) => {
       }
 
     });
-  });*/
+  });
 
 }

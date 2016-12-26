@@ -1,13 +1,13 @@
 import {Injectable} from '@angular/core';
 import {Http}    from '@angular/http';
 import {Observable} from 'rxjs/Rx';
-import {tokenNotExpired} from 'angular2-jwt';
+import {tokenNotExpired, AuthHttp} from 'angular2-jwt';
 
 @Injectable()
 export class AuthenticationService {
   public token: string;
 
-  constructor(private http: Http) {
+  constructor(private http: Http, private authHttp: AuthHttp) {
     var currentUser = JSON.parse(localStorage.getItem('currentUser'));
     this.token = currentUser && currentUser.token;
   }
@@ -31,9 +31,20 @@ export class AuthenticationService {
   }
 
   logout() {
+
     this.token = null;
     localStorage.removeItem('id_token');
 
+    this.authHttp.get('/api/auth/logout')
+      .subscribe(
+        res => {
+          console.log(res);
+        },
+        err => {
+          console.log('erro', err)
+        }
+      );
+    //localStorage.removeItem('id_token');
   }
 
   loggedIn() {
