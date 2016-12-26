@@ -36,7 +36,7 @@ let server = http.createServer(app);
 // Integrate Socket.io
 let io = socketio.listen(server);
 // Load Mongoose for MongoDB interactions
-import mongoose from 'mongoose';
+//import mongoose from 'mongoose';
 // Log requests to the console (Express 4)
 import morgan from 'morgan';
 // Pull information from HTML POST (express 4)
@@ -64,7 +64,7 @@ let port = process.env.PORT || 3000;
 import mongooseConf from './config/mongoose.conf.js';
 
 // Pass Mongoose configuration Mongoose instance
-mongooseConf(mongoose);
+//mongooseConf(mongoose);
 
 // Import PassportJS configuration
 import passportConf from './config/passport.conf.js';
