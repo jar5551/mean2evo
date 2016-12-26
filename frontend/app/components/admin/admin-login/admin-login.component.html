@@ -1,8 +1,14 @@
 <div class="login-container" fxLayout="row" fxLayoutAlign="start center">
   <div class="login-box" fxFlex="345px" fxFlexOffset="8vw">
     <form (submit)="login()">
-      <md-input placeholder="Email" [(ngModel)]="loginData.email" name="email" type="email"></md-input>
-      <md-input placeholder="Password" [(ngModel)]="loginData.password" name="password" type="password"></md-input>
+
+      <md-input-container class="login-full-width">
+        <input md-input placeholder="Email" [(ngModel)]="loginData.email" name="email" type="email">
+      </md-input-container>
+
+      <md-input-container class="login-full-width">
+        <input md-input placeholder="Password" [(ngModel)]="loginData.password" name="password" type="password">
+      </md-input-container>
 
       <button md-raised-button color="primary" type="submit">Sign In</button>
 
