@@ -58,7 +58,7 @@ import base from './backend/sockets/base.socket';
 base(io);
 
 // Set the port for this app
-let port = process.env.PORT || 8080;
+let port = process.env.PORT || 3000;
 
 // Load Mongoose config file for connecting to MongoDB instance
 import mongooseConf from './config/mongoose.conf.js';
