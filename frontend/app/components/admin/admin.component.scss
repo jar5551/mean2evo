@@ -1,3 +1,12 @@
 #admin {
   height: 100%;
+
+  md-toolbar {
+    .spacer {
+      flex: 1 1 auto;
+    }
+    .icon {
+      padding: 0 14px;
+    }
+  }
 }

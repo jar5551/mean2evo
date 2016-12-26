@@ -1,6 +1,28 @@
 <md-toolbar color="primary">
-  Mongo, ExpressJS, Anular 2, NodeJS - Starter Pack
+    <span>Mongo, ExpressJS, Anular 2, NodeJS - Starter Pack</span>
+    <span class="spacer"></span>
+    <md-icon class="icon">favorite</md-icon>
+    <md-icon class="icon">delete</md-icon>
+
+    <button md-icon-button [mdMenuTriggerFor]="menu">
+        <md-icon>more_vert</md-icon>
+    </button>
+    <md-menu #menu="mdMenu">
+        <button md-menu-item>
+            <md-icon>dialpad</md-icon>
+            <span>Redial</span>
+        </button>
+        <button md-menu-item disabled>
+            <md-icon>voicemail</md-icon>
+            <span>Check voicemail</span>
+        </button>
+        <button md-menu-item>
+            <md-icon>notifications_off</md-icon>
+            <span>Disable alerts</span>
+        </button>
+    </md-menu>
 </md-toolbar>
+
 
 <a routerLink="/admin/login" routerLinkActive="active">Login to Digital Dashboard</a>
 <a routerLink="/admin/dashboard">DASHBOARD</a>
