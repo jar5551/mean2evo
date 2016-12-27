@@ -5,7 +5,7 @@
   },
   "apps": [
     {
-      "root": "frontend",
+      "root": "app",
       "outDir": "dist",
       "assets": [
         "assets",

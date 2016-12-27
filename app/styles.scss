@@ -21,13 +21,11 @@ time, mark, audio, video {
   margin: 0;
   padding: 0;
   border: 0;
-  font-size: 100%;
-  font: inherit;
   vertical-align: baseline;
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure,
-footer, header, hgroup, menu, nav, section {
+footer, header, hgroup, menu, nav, section, nav ul, nav li, nav a {
   display: block;
 }
 body {
@@ -57,16 +55,6 @@ html, body {
 body {
   font-family: 'Roboto', sans-serif;
   font-size: $fontSize;
-
-  /*app-root {
-    height: 100%;
-    display: block;
-  }
-
-  app-admin {
-    height: 100%;
-    display: block;
-  }*/
 }
 
 * {

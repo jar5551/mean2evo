@@ -1,0 +1,33 @@
+@import "../../shared/styles/_main.scss";
+
+#admin {
+  height: 100%;
+  background-color: $cPaleGray;
+
+  md-toolbar {
+    .spacer {
+      flex: 1 1 auto;
+    }
+    .icon {
+      padding: 0 14px;
+    }
+  }
+
+  .flex-container {
+    .sidenav {
+      background-color: $cWhite;
+
+      nav {
+        ul {
+          li {
+            a {
+              height: em(66);
+              line-height: em(66);
+
+            }
+          }
+        }
+      }
+    }
+  }
+}
