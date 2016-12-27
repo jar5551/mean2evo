@@ -1,4 +1,5 @@
 import postRoutes from './components/post/post.router';
+import userRoutes from './components/user/user.router';
 import authenticationRoutes from './components/authentication/authentication.router';
 
 export default (app, router, passport, jwt) => {
@@ -12,6 +13,7 @@ export default (app, router, passport, jwt) => {
   });
 
   postRoutes(app, router);
+  userRoutes(app, router);
   authenticationRoutes(app, router, passport);
 
   app.use('/api', router);

@@ -8,11 +8,13 @@ export default (app, router) => {
   router.route('/posts')
     .get((req, res) => {
 
-      Post.find().then(posts => {
-        res.json(posts);
-      }).catch(err => {
-        res.send(err);
-      })
+      Post.find()
+        .then(posts => {
+          res.json(posts);
+        })
+        .catch(err => {
+          res.send(err);
+        })
     })
 
     .post((req, res) => {
@@ -25,11 +27,13 @@ export default (app, router) => {
         })
       }
 
-      Post.create(posts).then(posts => {
-        console.log('created', posts);
-        return res.send(posts);
-      }).catch(err => {
-        return res.send(err);
-      });
+      Post.create(posts)
+        .then(posts => {
+          console.log('created', posts);
+          return res.send(posts);
+        })
+        .catch(err => {
+          return res.send(err);
+        });
     });
 }

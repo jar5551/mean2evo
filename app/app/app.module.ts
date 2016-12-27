@@ -8,7 +8,6 @@ import {FlexLayoutModule} from "@angular/flex-layout";
 import {AUTH_PROVIDERS} from 'angular2-jwt';
 
 import {AppComponent} from './app.component';
-import {PostsComponent} from './components/posts/posts.component';
 
 import {appRoutes} from './app.routing';
 import {AdminComponent} from './components/admin/admin.component';
@@ -18,15 +17,18 @@ import {AdminDashboardComponent} from './components/admin/admin-dashboard/admin-
 
 import {AuthGuardService} from './services/auth-guard.service';
 import {AuthenticationService} from './services/authentication.service';
+import { AdminPostsComponent } from './components/admin/admin-posts/admin-posts.component';
+import { AdminUsersComponent } from './components/admin/admin-users/admin-users.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    PostsComponent,
     AdminComponent,
     AdminLoginComponent,
     ClientHomeComponent,
-    AdminDashboardComponent
+    AdminDashboardComponent,
+    AdminPostsComponent,
+    AdminUsersComponent
   ],
   imports: [
     BrowserModule,

@@ -3,8 +3,11 @@
 #admin {
   height: 100%;
   background-color: $cPaleGray;
+  padding-top: em(65);
 
   md-toolbar {
+    @include position(fixed, 0 0 null 0);
+
     .spacer {
       flex: 1 1 auto;
     }
@@ -18,6 +21,10 @@
       background-color: $cWhite;
 
       nav {
+        @include position(fixed);
+        background-color: $cWhite;
+        height: 100%;
+
         ul {
           li {
             a {

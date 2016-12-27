@@ -3,10 +3,12 @@
  */
 import {Routes} from '@angular/router';
 
-import {PostsComponent} from './components/posts/posts.component';
 import {AdminComponent} from './components/admin/admin.component';
 import {AdminLoginComponent} from './components/admin/admin-login/admin-login.component';
 import {AdminDashboardComponent} from './components/admin/admin-dashboard/admin-dashboard.component';
+import {AdminPostsComponent} from './components/admin/admin-posts/admin-posts.component';
+import {AdminUsersComponent} from './components/admin/admin-users/admin-users.component';
+
 import {ClientHomeComponent} from './components/client/client-home/client-home.component';
 
 import {AuthGuardService} from './services/auth-guard.service';
@@ -29,6 +31,14 @@ export const appRoutes: Routes = [
       {
         path: 'dashboard',
         component: AdminDashboardComponent
+      },
+      {
+        path: 'posts',
+        component: AdminPostsComponent
+      },
+      {
+        path: 'users',
+        component: AdminUsersComponent
       }
     ]
   }
