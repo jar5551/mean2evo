@@ -10,6 +10,7 @@ import {AdminPostsService} from './admin-posts.service';
 export class AdminPostsComponent implements OnInit {
 
   public posts: Array<any>;
+  public loading: boolean = true;
 
   constructor(private adminPostsService: AdminPostsService) {
   }
@@ -19,7 +20,17 @@ export class AdminPostsComponent implements OnInit {
       .subscribe(res => {
         console.log(res);
         this.posts = res;
+      },
+      err => {
+        console.log(err);
+      },
+      () => {
+        this.handleCompleteLoading();
       });
+  }
+
+  handleCompleteLoading() {
+    this.loading = false;
   }
 
 }

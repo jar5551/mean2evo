@@ -32,19 +32,14 @@ export class AuthenticationService {
 
   logout() {
 
-    this.token = null;
-    localStorage.removeItem('id_token');
+    return this.authHttp.get('/api/auth/logout')
+      .map(res => {
 
-    this.authHttp.get('/api/auth/logout')
-      .subscribe(
-        res => {
-          console.log(res);
-        },
-        err => {
-          console.log('erro', err)
-        }
-      );
-    //localStorage.removeItem('id_token');
+        this.token = null;
+        localStorage.removeItem('id_token');
+
+          return res;
+        });
   }
 
   loggedIn() {

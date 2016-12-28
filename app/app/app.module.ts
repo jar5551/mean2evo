@@ -22,6 +22,7 @@ import {AdminPostsComponent} from './components/admin/admin-posts/admin-posts.co
 import {AdminUsersComponent} from './components/admin/admin-users/admin-users.component';
 
 import {AuthHttpService} from './services/auth-http.service';
+import { TruncateTextPipe } from './pipes/truncate-text.pipe';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import {AuthHttpService} from './services/auth-http.service';
     ClientHomeComponent,
     AdminDashboardComponent,
     AdminPostsComponent,
-    AdminUsersComponent
+    AdminUsersComponent,
+    TruncateTextPipe
   ],
   imports: [
     BrowserModule,

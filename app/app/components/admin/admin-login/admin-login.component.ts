@@ -15,6 +15,8 @@ export class AdminLoginComponent implements OnInit {
     password: ''
   };
 
+  public errorMsg: string = '';
+
   constructor(private authenticationService: AuthenticationService,
               private router: Router) {
     console.log('Login component consturtor go!');
@@ -25,6 +27,11 @@ export class AdminLoginComponent implements OnInit {
   }
 
   login() {
+    if(!this.loginData.email || !this.loginData.password) {
+      this.handleError();
+      return;
+    }
+
     this.authenticationService.login(this.loginData.email, this.loginData.password)
       .subscribe(
         res => {
@@ -32,11 +39,19 @@ export class AdminLoginComponent implements OnInit {
           this.router.navigate(['/admin/dashboard']);
         },
         err => {
-          console.log('error', err);
+          this.handleError();
         }
       );
 
     console.log('signIn');
+  }
+
+  handleError() {
+    this.errorMsg = 'Invalid email and/or password';
+  }
+
+  clearError() {
+    this.errorMsg = '';
   }
 
 }

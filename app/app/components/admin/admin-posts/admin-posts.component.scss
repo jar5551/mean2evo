@@ -1,0 +1,10 @@
+@import "../../../shared/styles/main";
+
+.loading {
+  @include position(absolute, 0 0 0 0);
+
+  md-spinner {
+    @include position(absolute, 0 0 0 0);
+    margin: auto;
+  }
+}

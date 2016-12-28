@@ -3,12 +3,16 @@
     <form (submit)="login()">
 
       <md-input-container class="login-full-width">
-        <input md-input placeholder="Email" [(ngModel)]="loginData.email" name="email" type="email">
+        <input md-input placeholder="Email" [(ngModel)]="loginData.email" name="email" type="email" (ngModelChange)="clearError()">
       </md-input-container>
 
       <md-input-container class="login-full-width">
-        <input md-input placeholder="Password" [(ngModel)]="loginData.password" name="password" type="password">
+        <input md-input placeholder="Password" [(ngModel)]="loginData.password" name="password" type="password" (ngModelChange)="clearError()">
       </md-input-container>
+
+      <div class="error">
+        {{errorMsg}}
+      </div>
 
       <button md-raised-button color="primary" type="submit">Sign In</button>
 
