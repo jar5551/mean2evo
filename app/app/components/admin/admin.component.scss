@@ -7,6 +7,7 @@
 
   md-toolbar {
     @include position(fixed, 0 0 null 0);
+    z-index: 99;
 
     .spacer {
       flex: 1 1 auto;
