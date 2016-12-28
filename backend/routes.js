@@ -13,7 +13,7 @@ export default (app, router, passport, jwt) => {
   });
 
   postRoutes(app, router);
-  userRoutes(app, router);
+  userRoutes(app, router, passport);
   authenticationRoutes(app, router, passport);
 
   app.use('/api', router);

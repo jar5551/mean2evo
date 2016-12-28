@@ -5,7 +5,8 @@ import {HttpModule} from '@angular/http';
 import {MaterialModule} from '@angular/material';
 import {RouterModule} from '@angular/router';
 import {FlexLayoutModule} from "@angular/flex-layout";
-import {AUTH_PROVIDERS} from 'angular2-jwt';
+import {AuthHttp} from 'angular2-jwt';
+import {Http} from '@angular/http';
 
 import {AppComponent} from './app.component';
 
@@ -17,8 +18,10 @@ import {AdminDashboardComponent} from './components/admin/admin-dashboard/admin-
 
 import {AuthGuardService} from './services/auth-guard.service';
 import {AuthenticationService} from './services/authentication.service';
-import { AdminPostsComponent } from './components/admin/admin-posts/admin-posts.component';
-import { AdminUsersComponent } from './components/admin/admin-users/admin-users.component';
+import {AdminPostsComponent} from './components/admin/admin-posts/admin-posts.component';
+import {AdminUsersComponent} from './components/admin/admin-users/admin-users.component';
+
+import {AuthHttpService} from './services/auth-http.service';
 
 @NgModule({
   declarations: [
@@ -41,7 +44,11 @@ import { AdminUsersComponent } from './components/admin/admin-users/admin-users.
   providers: [
     AuthGuardService,
     AuthenticationService,
-    AUTH_PROVIDERS
+    {
+      provide: AuthHttp,
+      useFactory: AuthHttpService,
+      deps: [Http]
+    }
   ],
   bootstrap: [AppComponent]
 })

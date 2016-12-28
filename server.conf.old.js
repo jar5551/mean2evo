@@ -49,7 +49,6 @@ import cookieParser from 'cookie-parser';
 
 import passportJWT from 'passport-jwt';
 import jwt from 'jsonwebtoken';
-
 // # Configuration
 
 // Load Socket.io server functionality

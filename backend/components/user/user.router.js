@@ -3,11 +3,10 @@
  */
 
 import User from './user.model';
-import jwt from 'express-jwt';
 
-export default (app, router) => {
+export default (app, router, passport) => {
   router.route('/users')
-    .get(jwt({secret: '6a4f243f91f461dc1c691a61aedbb0abff02a4f4'}), (req, res) => { //TODO handle with config of JWT
+    .get(passport.authenticate('jwt', { session: false}), (req, res) => { //TODO handle with config of JWT
       User.find({}, 'email username')
         .then(users => {
           res.json(users);
