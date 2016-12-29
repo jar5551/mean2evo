@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {AdminPostsService} from './admin-posts.service';
+import {MdDialog, MdDialogRef} from '@angular/material';
 
 @Component({
   selector: 'app-admin-posts',
@@ -12,25 +13,31 @@ export class AdminPostsComponent implements OnInit {
   public posts: Array<any>;
   public loading: boolean = true;
 
-  constructor(private adminPostsService: AdminPostsService) {
+  constructor(private adminPostsService: AdminPostsService,
+              public dialog: MdDialog) {
   }
 
   ngOnInit() {
     this.adminPostsService.getPosts()
       .subscribe(res => {
-        console.log(res);
-        this.posts = res;
-      },
-      err => {
-        console.log(err);
-      },
-      () => {
-        this.handleCompleteLoading();
-      });
+          console.log(res);
+          this.posts = res;
+        },
+        err => {
+          console.log(err);
+        },
+        () => {
+          this.handleCompleteLoading();
+        });
   }
 
   handleCompleteLoading() {
     this.loading = false;
+  }
+
+  newPost() {
+    console.log('open new post dialog');
+
   }
 
 }
