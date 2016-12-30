@@ -18,12 +18,13 @@ export class AdminLoginComponent implements OnInit {
   public errorMsg: string = '';
 
   constructor(private authenticationService: AuthenticationService,
-              private router: Router) {
-    console.log('Login component consturtor go!');
-  }
+              private router: Router) {}
 
   ngOnInit() {
-    this.authenticationService.logout();
+    //this.authenticationService.logout();
+    if(this.authenticationService.loggedIn()) {
+      this.router.navigate(['/admin/dashboard']);
+    }
   }
 
   login() {
