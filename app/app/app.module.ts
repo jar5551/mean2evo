@@ -22,7 +22,8 @@ import {AdminPostsComponent} from './components/admin/admin-posts/admin-posts.co
 import {AdminUsersComponent} from './components/admin/admin-users/admin-users.component';
 
 import {AuthHttpService} from './services/auth-http.service';
-import { TruncateTextPipe } from './pipes/truncate-text.pipe';
+import {TruncateTextPipe} from './pipes/truncate-text.pipe';
+import {AdminPostsFormComponent} from './components/admin/admin-posts/admin-posts-form.component';
 
 @NgModule({
   declarations: [
@@ -33,8 +34,9 @@ import { TruncateTextPipe } from './pipes/truncate-text.pipe';
     AdminDashboardComponent,
     AdminPostsComponent,
     AdminUsersComponent,
-    TruncateTextPipe
-  ],
+    TruncateTextPipe,
+    AdminPostsFormComponent
+],
   imports: [
     BrowserModule,
     FormsModule,
@@ -52,6 +54,7 @@ import { TruncateTextPipe } from './pipes/truncate-text.pipe';
       deps: [Http]
     }
   ],
+  entryComponents: [AdminPostsFormComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule {

@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {AdminPostsService} from './admin-posts.service';
 import {MdDialog, MdDialogRef} from '@angular/material';
+import {AdminPostsFormComponent} from './admin-posts-form.component';
 
 @Component({
   selector: 'app-admin-posts',
@@ -37,7 +38,14 @@ export class AdminPostsComponent implements OnInit {
 
   newPost() {
     console.log('open new post dialog');
+    this.dialog.open(AdminPostsFormComponent);
 
+
+    let dialogRef = this.dialog.open(AdminPostsFormComponent);
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result);
+
+    });
   }
 
 }
