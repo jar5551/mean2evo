@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {AdminPostsService} from './admin-posts.service';
-import {MdDialog, MdDialogRef} from '@angular/material';
+import {MdDialog} from '@angular/material';
 import {AdminPostsFormComponent} from './admin-posts-form.component';
 
 @Component({
@@ -11,18 +11,23 @@ import {AdminPostsFormComponent} from './admin-posts-form.component';
 })
 export class AdminPostsComponent implements OnInit {
 
-  public posts: Array<any>;
+  public items: Array<any>;
   public loading: boolean = true;
+  public templateConfig: Object;
 
   constructor(private adminPostsService: AdminPostsService,
               public dialog: MdDialog) {
   }
 
   ngOnInit() {
+    this.templateConfig = {
+      title: 'Posts',
+      icon: 'note'
+    };
+
     this.adminPostsService.getPosts()
       .subscribe(res => {
-          console.log(res);
-          this.posts = res;
+          this.items = res;
         },
         err => {
           console.log(err);
@@ -30,6 +35,7 @@ export class AdminPostsComponent implements OnInit {
         () => {
           this.handleCompleteLoading();
         });
+
   }
 
   handleCompleteLoading() {
