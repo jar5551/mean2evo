@@ -6,7 +6,7 @@ import User from './user.model';
 
 export default (app, router, passport) => {
   router.route('/users')
-    .get(passport.authenticate('jwt', { session: false}), (req, res) => { //TODO handle with config of JWT
+    .get(passport.authenticate('jwt', {session: false}), (req, res) => {
       User.find({}, 'email username')
         .then(users => {
           res.json(users);

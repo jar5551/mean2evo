@@ -3,6 +3,8 @@ import {AdminPostsService} from './admin-posts.service';
 import {MdDialog} from '@angular/material';
 import {AdminPostsFormComponent} from './admin-posts-form.component';
 
+declare var jQuery:any;
+
 @Component({
   selector: 'app-admin-posts',
   templateUrl: './admin-posts.component.html',
@@ -44,8 +46,7 @@ export class AdminPostsComponent implements OnInit {
 
   newPost() {
     console.log('open new post dialog');
-    this.dialog.open(AdminPostsFormComponent);
-
+    //this.dialog.open(AdminPostsFormComponent);
 
     let dialogRef = this.dialog.open(AdminPostsFormComponent);
     dialogRef.afterClosed().subscribe(result => {

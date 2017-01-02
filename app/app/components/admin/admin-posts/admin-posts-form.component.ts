@@ -8,7 +8,7 @@ import {MdDialogRef} from '@angular/material';
 })
 export class AdminPostsFormComponent {
 
-  constructor(public dialogRef: MdDialogRef<AdminPostsFormComponent>) {
+  constructor() {
   }
 
 
