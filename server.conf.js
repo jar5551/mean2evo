@@ -45,9 +45,11 @@ import bodyParser from 'body-parser';
 import methodOverride from 'method-override';
 // PassportJS
 import passport from 'passport';
+
 import cookieParser from 'cookie-parser';
 
 import passportJWT from 'passport-jwt';
+
 import jwt from 'jsonwebtoken';
 
 // # Configuration

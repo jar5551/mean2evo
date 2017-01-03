@@ -14,8 +14,10 @@
 import LocalStrategy from 'passport-local';
 
 // Load user model
-import User from './../backend/components/user/user.model.js';
-import InvalidToken from './../backend/components/authentication/inalid-token.model.js';
+import User from './../backend/components/user/user.model';
+import InvalidToken from './../backend/components/authentication/inalid-token.model';
+import RefreshToken from './../backend/components/authentication/refresh-token.model';
+import RefreshStrategy from './refresh.strategy';
 
 import jwtConf from './jwt.conf';
 
@@ -23,6 +25,32 @@ export default (passport, passportJWT, jwt) => {
   let jwtOptions = jwtConf(passportJWT);
 
   let JwtStrategy = passportJWT.Strategy;
+
+  let refreshStrategy = RefreshStrategy;
+
+  let handleRefreshToken = (userId) => {
+    return new Promise((resolve, reject) => {
+      let tokens = {
+        token: jwt.sign({id: userId}, jwtOptions.secretOrKey, {
+          expiresIn: jwtOptions.expiresIn
+        }),
+        refresh: jwt.sign({id: userId}, jwtOptions.refreshSecret, {
+          expiresIn: jwtOptions.refreshExpiresIn * 86400
+        })
+      };
+
+      RefreshToken.create({
+        token: tokens.refresh,
+        expiresAt: parseInt(jwt.decode(tokens.refresh).exp + '000')
+      }, (err, res) => {
+        if (err)
+          return reject(err);
+
+        return resolve(tokens);
+      });
+    });
+
+  };
 
   // Define length boundariess for expected parameters
   let bounds = {
@@ -108,21 +136,20 @@ export default (passport, passportJWT, jwt) => {
 
   // By default, if there is no name, it would just be called 'local'
 
-  passport.use('jwt', new JwtStrategy(jwtOptions, function (jwt_payload, done) {
-
+  passport.use('jwt', new JwtStrategy(jwtOptions, (jwt_payload, done) => {
     InvalidToken.find({
       token: jwt.sign(jwt_payload, jwtOptions.secretOrKey)
     }, (err, docs) => {
       if (err) {
         return done(err, false);
       }
-      if(!docs.length) {
+      if (!docs.length) {
         User.findById(jwt_payload.id, (err, user) => {
           if (err) {
             return done(err, false);
           }
           if (user) {
-            if(new Date(user.passwordDate).getTime() > new Date(parseInt(jwt_payload.iat + '000')).getTime()) {
+            if (new Date(user.passwordDate).getTime() > new Date(parseInt(jwt_payload.iat + '000')).getTime()) {
               done(null, false);
             }
             done(null, user);
@@ -142,6 +169,40 @@ export default (passport, passportJWT, jwt) => {
   // for signup
 
   // By default, if there is no name, it would just be called 'local'
+
+  passport.use('refresh-login', new refreshStrategy(jwtOptions, (jwt_payload, done) => {
+      RefreshToken.find({
+        token: jwt.sign(jwt_payload, jwtOptions.refreshSecret)
+      }, (err, docs) => {
+        if (err) {
+          return done(err, false);
+        }
+
+        if (!docs.length)
+          return done(null, false);
+
+        User.findById(jwt_payload.id, (err, user) => {
+          if (err)
+            return done(err, false);
+
+          if (!user)
+            return done(null, false);
+
+          if (new Date(user.passwordDate).getTime() > new Date(parseInt(jwt_payload.iat + '000')).getTime()) {
+            return done(null, false);
+          }
+
+          handleRefreshToken(user.id)
+            .then(res => {
+              return done(null, res);
+            })
+            .catch(err => {
+              return done(null, false);
+            });
+        });
+      });
+    }
+  ));
 
   passport.use('local-login', new LocalStrategy({
       usernameField: 'email',
@@ -180,38 +241,46 @@ export default (passport, passportJWT, jwt) => {
       User.findOne({email: username.toLowerCase()}
         , (err, user) => {
 
-        if (err)
-          return done(err);
+          if (err)
+            return done(err);
 
-        // If no user is found, return a message
-        if (!user) {
+          // If no user is found, return a message
+          if (!user) {
 
-          return done(null,
+            return done(null,
 
-            false,
+              false,
 
-            {
-              loginMessage: 'That user was not found. ' +
-              'Please enter valid user credentials.'
-            }
-          );
-        }
+              {
+                loginMessage: 'That user was not found. ' +
+                'Please enter valid user credentials.'
+              }
+            );
+          }
 
-        // If the user is found but the password is incorrect
-        if (!user.validPassword(password)) {
+          // If the user is found but the password is incorrect
+          if (!user.validPassword(password)) {
 
-          return done(null,
+            return done(null,
 
-            false,
+              false,
 
-            {loginMessage: 'Invalid password entered.'});
-        }
+              {loginMessage: 'Invalid password entered.'});
+          }
 
-        // Otherwise all is well; return user token
-        return done(null,
-          jwt.sign({id: user.id}, jwtOptions.secretOrKey, {
-            expiresIn: jwtOptions.expiresIn
-          }));
-      });
+          // Otherwise all is well; return user token
+          /*return done(null,
+           jwt.sign({id: user.id}, jwtOptions.secretOrKey, {
+           expiresIn: jwtOptions.expiresIn
+           }));*/
+
+          handleRefreshToken(user.id)
+            .then(res => {
+              return done(null, res);
+            })
+            .catch(err => {
+              return done(null, false);
+            });
+        });
     }));
 };

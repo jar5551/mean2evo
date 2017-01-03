@@ -1,15 +1,15 @@
 import {Injectable} from '@angular/core';
-import {Http} from '@angular/http';
+import {AuthHttp} from 'angular2-jwt';
 import {Observable} from 'rxjs/Rx';
 
 @Injectable()
 export class AdminPostsService {
 
-  constructor(private http: Http) {
+  constructor(private authHttp: AuthHttp) {
   }
 
   getPosts() {
-    return this.http.get('/api/posts')
+    return this.authHttp.get('/api/posts')
       .map(res => {
         return res.json();
       });

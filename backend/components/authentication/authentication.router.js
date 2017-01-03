@@ -34,7 +34,11 @@ export default (app, router, passport) => {
         // Set HTTP status code `200 OK`
         res.status(200);
 
-        res.json({message: "ok", token: user});
+        res.json({
+          message: "ok",
+          token: user.token,
+          refresh: user.refresh
+        });
       });
 
     })(req, res, next);
@@ -64,6 +68,27 @@ export default (app, router, passport) => {
       }
 
     });
+  });
+
+  router.post('/auth/refresh', (req, res, next) => {
+    passport.authenticate('refresh-login', (err, token, info) => {
+
+      if (err)
+        return next(err);
+
+      console.log(token);
+
+      if (!token) {
+        res.status(401);
+        return next(info);
+      }
+
+      res.json({
+        message: "ok",
+        token: token.token,
+        refresh: token.refresh
+      });
+    })(req, res, next);
   });
 
 }
