@@ -14,6 +14,8 @@ export class AdminComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.authenticationService.startupTokenRefresh();
+
     if (this.router.url === '/admin')
       this.router.navigate(['/admin/dashboard']);
   }

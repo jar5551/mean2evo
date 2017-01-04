@@ -4,7 +4,6 @@
 import User from './../user/user.model'
 import tokenExtract from './authentication.middleware';
 import InvalidToken from './inalid-token.model';
-import passportJWT from 'passport-jwt';
 
 export default (app, router, passport) => {
   router.post('/auth/signin', (req, res, next) => {

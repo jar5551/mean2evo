@@ -5,7 +5,7 @@ import {HttpModule} from '@angular/http';
 import {MaterialModule} from '@angular/material';
 import {RouterModule} from '@angular/router';
 import {FlexLayoutModule} from "@angular/flex-layout";
-import {AuthHttp} from 'angular2-jwt';
+import {AuthHttp, JwtHelper} from 'angular2-jwt';
 import {Http} from '@angular/http';
 
 import {AppComponent} from './app.component';
@@ -46,6 +46,7 @@ import {AdminPostsFormComponent} from './components/admin/admin-posts/admin-post
     RouterModule.forRoot(appRoutes)
   ],
   providers: [
+    JwtHelper,
     AuthGuardService,
     AuthenticationService,
     {
