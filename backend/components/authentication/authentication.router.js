@@ -76,7 +76,7 @@ export default (app, router, passport) => {
       if (err)
         return next(err);
 
-      console.log(token);
+      console.log('/auth/refresh', token);
 
       if (!token) {
         res.status(401);

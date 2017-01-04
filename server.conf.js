@@ -50,8 +50,6 @@ import cookieParser from 'cookie-parser';
 
 import passportJWT from 'passport-jwt';
 
-import jwt from 'jsonwebtoken';
-
 // # Configuration
 
 // Load Socket.io server functionality
@@ -72,7 +70,7 @@ mongooseConf(mongoose);
 import passportConf from './config/passport.conf.js';
 
 // Pass Passport configuration our PassportJS instance
-passportConf(passport, passportJWT, jwt);
+passportConf(passport, passportJWT);
 
 if (process.env.NODE_ENV === 'development' ||
   process.env.NODE_ENV === 'test')
@@ -102,7 +100,7 @@ let router = express.Router();
 
 import routes from './backend/routes';
 
-routes(app, router, passport, jwt);
+routes(app, router, passport);
 
 server.listen(port);
 

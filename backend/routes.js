@@ -2,7 +2,7 @@ import postRoutes from './components/post/post.router';
 import userRoutes from './components/user/user.router';
 import authenticationRoutes from './components/authentication/authentication.router';
 
-export default (app, router, passport, jwt) => {
+export default (app, router, passport) => {
   // ### Express Middlware to use for all requests
   router.use((req, res, next) => {
 
