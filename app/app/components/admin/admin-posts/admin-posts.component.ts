@@ -3,14 +3,13 @@ import {AdminPostsService} from './admin-posts.service';
 import {MdDialog} from '@angular/material';
 import {AdminPostsFormComponent} from './admin-posts-form.component';
 
-declare var jQuery:any;
-
 @Component({
   selector: 'app-admin-posts',
   templateUrl: './admin-posts.component.html',
   styleUrls: ['./admin-posts.component.scss'],
   providers: [AdminPostsService]
 })
+
 export class AdminPostsComponent implements OnInit {
 
   public items: Array<any>;
