@@ -9,26 +9,44 @@ export class AuthGuardService implements CanActivate {
   constructor(private authenticationService: AuthenticationService, private router: Router) {
   }
 
+  private handleNotloggedIn() : boolean {
+    this.router.navigate(['/admin/login']);
+    return false;
+  }
+
   canActivate() {
-    if(this.authenticationService.loggedIn()) {
+    return this.authenticationService.loggedIn().map(authState => {
+      if (!authState)
+        this.handleNotloggedIn();
+      console.log('activate?', !!authState);
+      return !!authState;
+    }).take(1);
+
+    /*return this.authenticationService.loggedIn()
+      .map(res => {
+        console.log(res);
+        return true;
+      });*/
+  }
+
+  canActivateOld() {
+    if (this.authenticationService.loggedIn()) {
       return true;
     } else {
-      this.router.navigate(['/admin/login']);
-      return false;
+      return this.handleNotloggedIn();
     }
   }
 
- /* canActivate() {
-    if (localStorage.getItem('currentUser')) {
-      // logged in so return true
-      return true;
-    }
+  /* canActivate() {
+   if (localStorage.getItem('currentUser')) {
+   // logged in so return true
+   return true;
+   }
 
-    // not logged in so redirect to login page
-    this.router.navigate(['/login']);
-    return false;
-  }*/
-
+   // not logged in so redirect to login page
+   this.router.navigate(['/login']);
+   return false;
+   }*/
 
 
 }

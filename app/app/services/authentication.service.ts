@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {Http} from '@angular/http';
 import {Observable} from 'rxjs/Rx';
 import {tokenNotExpired, AuthHttp, JwtHelper} from 'angular2-jwt';
+import {ReplaySubject} from 'rxjs';
 
 @Injectable()
 export class AuthenticationService {
@@ -19,38 +20,57 @@ export class AuthenticationService {
         let token = res.json().token;
         let refreshToken = res.json().refresh;
 
-        if (token) {
-          this.token = token;
-
-          localStorage.setItem('id_token', token);
-          localStorage.setItem('refresh_token', refreshToken);
-
+        if (token && refreshToken) {
+          this.setTokens(token, refreshToken);
           return true;
-        } else {
-          return false;
         }
+
+        return false;
         //res.json()
       });
   }
 
   public logout() {
-
     return this.authHttp.get('/api/auth/logout')
       .map(res => {
-
         this.unscheduleRefresh();
         this.token = null;
         localStorage.removeItem('id_token');
-
-          return res;
-        });
+        return res;
+      });
   }
 
-  public loggedIn() {
-    return tokenNotExpired();
+  public loggedIn(): Observable<boolean> {
+    let resultSubject = new ReplaySubject(1);
+
+    if (!tokenNotExpired() && tokenNotExpired(null, localStorage.getItem('refresh_token'))) {
+      this.getNewJwt()
+        .subscribe(
+          res => {
+            if (res) {
+              resultSubject.next(tokenNotExpired());
+            }
+          },
+          err => {
+            this.logout();
+          });
+
+    } else {
+      resultSubject.next(tokenNotExpired());
+    }
+
+    return resultSubject;
+
+    //return this.http.post('/api/auth/refresh', {token: localStorage.getItem('refresh_token')});
+    //return tokenNotExpired();
+
+    /*if(!tokenNotExpired())
+     return tokenNotExpired(null, localStorage.getItem('refresh_token'));
+
+     return tokenNotExpired();*/
   }
 
-  public scheduleRefresh() {
+  private scheduleRefresh() {
     let source = this.authHttp.tokenStream.flatMap(
       token => {
 
@@ -67,7 +87,7 @@ export class AuthenticationService {
       });
 
     this.refreshSubscription = source.subscribe(() => {
-      this.getNewJwt();
+      this.getNewJwt().subscribe();
     });
   }
 
@@ -95,39 +115,50 @@ export class AuthenticationService {
       // reached, get a new JWT and schedule
       // additional refreshes
       source.subscribe(() => {
-        this.getNewJwt();
-        this.scheduleRefresh();
+        this.getNewJwt()
+          .subscribe(res => {
+            this.scheduleRefresh();
+          });
       });
     }
   }
 
-  public unscheduleRefresh() {
+  private unscheduleRefresh() {
     // Unsubscribe fromt the refresh
     if (this.refreshSubscription) {
       this.refreshSubscription.unsubscribe();
     }
   }
 
-  public getNewJwt() {
+  private getNewJwt() {
     // Get a new JWT from Auth0 using the refresh token saved
     // in local storage
 
-    console.log('getNewJwt');
-
-    this.http.post('/api/auth/refresh', {token: localStorage.getItem('refresh_token')})
+    return this.http.post('/api/auth/refresh', {token: localStorage.getItem('refresh_token')})
       .map(res => {
-        console.log('/api/auth/refresh', res);
+        let tokens = res.json();
+        this.setTokens(tokens.token, tokens.refresh);
+
+        return tokens;
       });
+
 
     /*this.local.get('refresh_token').then(token => {
-      this.lock.getClient().refreshToken(token, (err, delegationRequest) => {
-        if (err) {
-          alert(err);
-        }
-        this.local.set('id_token', delegationRequest.id_token);
-      });
-    }).catch(error => {
-      console.log(error);
-    });*/
+     this.lock.getClient().refreshToken(token, (err, delegationRequest) => {
+     if (err) {
+     alert(err);
+     }
+     this.local.set('id_token', delegationRequest.id_token);
+     });
+     }).catch(error => {
+     console.log(error);
+     });*/
+  }
+
+  private setTokens(token, refreshToken): void {
+    this.token = token;
+
+    localStorage.setItem('id_token', token);
+    localStorage.setItem('refresh_token', refreshToken);
   }
 }

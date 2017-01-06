@@ -27,7 +27,6 @@ export class AdminComponent implements OnInit {
       .subscribe(
         res => {
           this.router.navigate(['/admin/login']);
-
         }
       );
   }
