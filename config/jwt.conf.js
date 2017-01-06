@@ -3,12 +3,14 @@
  */
 
 export default (passportJWT) => {
+  console.log('passportJWT', process.env);
+
   return {
     jwtFromRequest: passportJWT.ExtractJwt.fromAuthHeader(),
-    secretOrKey: '6a4f243f91f461dc1c691a61aedbb0abff02a4f4',
-    refreshSecret: 'd32f506252e2fe83367379532bd1b5af396cff6c',
-    expiresIn: 10, //seconds
-    refreshExpiresIn: 14 //days
+    secretOrKey: process.env.ACCESS_TOKEN_SECRET,
+    refreshSecret: process.env.REFRESH_TOKEN_SECRET,
+    expiresIn: process.env.ACCESS_TOKEN_LIFETIME_MINS * 60, //seconds
+    refreshExpiresIn: process.env.REFRESH_TOKEN_LIFETIME_DAYS * 86400 //seconds
     //expiresIn: 86400 //seconds
   }
 }

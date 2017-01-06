@@ -33,7 +33,7 @@ export function HandleRefreshToken(userId, jwtOptions) {
         expiresIn: jwtOptions.expiresIn
       }),
       refresh: jwt.sign({id: userId}, jwtOptions.refreshSecret, {
-        expiresIn: jwtOptions.refreshExpiresIn * 86400
+        expiresIn: jwtOptions.refreshExpiresIn
       })
     };
 

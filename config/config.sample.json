@@ -1,18 +1,22 @@
 {
-  "ENV" : "production",
+  "ENV" : "development",
 
   "PORT" : 3000,
 
   "MONGO_URI" : {
 
     "DEVELOPMENT" :
-    "host",
+    "mongodb://localhost:27017/mean2evo",
 
     "PRODUCTION" :
-    "host",
+    "mongodb://localhost:27017/mean2evo",
 
-    "TEST" : "host"
+    "TEST" : "mongodb://localhost:27017/mean2evo"
   },
 
-  "SESSION_SECRET" : "s3cr3t"
+  "SESSION_SECRET" : "s3cr3t",
+  "ACCESS_TOKEN_SECRET": "accessS3cr3t",
+  "REFRESH_TOKEN_SECRET": "refreshS3cr3t",
+  "ACCESS_TOKEN_LIFETIME_MINS": 15,
+  "REFRESH_TOKEN_LIFETIME_DAYS": 14
 }

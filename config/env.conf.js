@@ -38,6 +38,18 @@ export function validateEnvVariables() {
   if (!process.env.PORT)
     process.env.PORT = config.PORT;
 
+  if (!process.env.ACCESS_TOKEN_SECRET)
+    process.env.ACCESS_TOKEN_SECRET = config.ACCESS_TOKEN_SECRET;
+
+  if (!process.env.REFRESH_TOKEN_SECRET)
+    process.env.REFRESH_TOKEN_SECRET = config.REFRESH_TOKEN_SECRET;
+
+  if (!process.env.ACCESS_TOKEN_LIFETIME_MINS)
+    process.env.ACCESS_TOKEN_LIFETIME_MINS = config.ACCESS_TOKEN_LIFETIME_MINS;
+
+  if (!process.env.REFRESH_TOKEN_LIFETIME_DAYS)
+    process.env.REFRESH_TOKEN_LIFETIME_DAYS = config.REFRESH_TOKEN_LIFETIME_DAYS;
+
   // Set the appropriate MongoDB URI
   validateMongoUri();
 

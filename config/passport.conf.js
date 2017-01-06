@@ -118,6 +118,9 @@ export default (passport, passportJWT) => {
   // By default, if there is no name, it would just be called 'local'
 
   passport.use('jwt', new JwtStrategy(jwtOptions, (jwt_payload, done) => {
+
+    console.log(jwt_payload);
+
     InvalidToken.find({
       token: jwt.sign(jwt_payload, jwtOptions.secretOrKey)
     }, (err, docs) => {
