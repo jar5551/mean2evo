@@ -15,7 +15,7 @@ export class ClientHomeComponent implements OnInit {
   }
 
   loggedIn() {
-    return this.authenticationService.loggedIn();
+    //return this.authenticationService.loggedIn();
   }
 
 }

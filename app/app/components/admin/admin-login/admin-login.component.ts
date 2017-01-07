@@ -22,9 +22,18 @@ export class AdminLoginComponent implements OnInit {
 
   ngOnInit() {
     //this.authenticationService.logout();
-    if(this.authenticationService.loggedIn()) {
+    /*if(this.authenticationService.loggedIn()) {
       this.router.navigate(['/admin/dashboard']);
-    }
+    }*/
+
+    this.authenticationService.loggedIn()
+      .subscribe(
+        res => {
+          if(!!res) {
+            this.router.navigate(['/admin/dashboard']);
+          }
+        }
+      );
   }
 
   login() {

@@ -3,13 +3,15 @@ import {Http} from '@angular/http';
 import {Observable} from 'rxjs/Rx';
 import {tokenNotExpired, AuthHttp, JwtHelper} from 'angular2-jwt';
 import {ReplaySubject} from 'rxjs';
+import {Router} from '@angular/router';
 
 @Injectable()
 export class AuthenticationService {
   public token: string;
+  public refreshToken: string;
   refreshSubscription: any;
 
-  constructor(private http: Http, private authHttp: AuthHttp, private jwtHelper: JwtHelper) {
+  constructor(private http: Http, private authHttp: AuthHttp, private jwtHelper: JwtHelper, private router: Router) {
     var currentUser = JSON.parse(localStorage.getItem('currentUser'));
     this.token = currentUser && currentUser.token;
   }
@@ -30,14 +32,29 @@ export class AuthenticationService {
       });
   }
 
+  public getMe() {
+    return this.authHttp.get('/api/auth/me')
+      .map(res => {
+        return res.json();
+      })
+  }
+
   public logout() {
+    console.log('logout');
+
     return this.authHttp.get('/api/auth/logout')
       .map(res => {
-        this.unscheduleRefresh();
-        this.token = null;
-        localStorage.removeItem('id_token');
+        this.removeTokens();
         return res;
       });
+  }
+
+  public removeTokens() {
+    this.token = null;
+    this.refreshToken = null;
+    localStorage.removeItem('id_token');
+    localStorage.removeItem('refresh_token');
+    this.unscheduleRefresh();
   }
 
   public loggedIn(): Observable<boolean> {
@@ -47,12 +64,18 @@ export class AuthenticationService {
       this.getNewJwt()
         .subscribe(
           res => {
-            if (res) {
-              resultSubject.next(tokenNotExpired());
+            console.log('res', res);
+            if (!res || res.status !== 200) {
+              return this.logout()
+                .subscribe();
             }
+
+            resultSubject.next(tokenNotExpired());
           },
           err => {
-            this.logout();
+            console.log('err', err);
+            this.removeTokens();
+            this.router.navigate(['/admin/login']);
           });
 
     } else {
@@ -95,32 +118,44 @@ export class AuthenticationService {
     // If the user is authenticated, use the token stream
     // provided by angular2-jwt and flatMap the token
 
-    if (this.loggedIn()) {
-      let source = this.authHttp.tokenStream.flatMap(
-        token => {
-          // Get the expiry time to generate
-          // a delay in milliseconds
-          let now: number = new Date().valueOf();
-          let jwtExp: number = this.jwtHelper.decodeToken(token).exp;
-          let exp: Date = new Date(0);
-          exp.setUTCSeconds(jwtExp);
-          let delay: number = exp.valueOf() - now;
+    console.log('startupTokenRefresh');
 
-          // Use the delay in a timer to
-          // run the refresh at the proper time
-          return Observable.timer(delay);
-        });
+    this.loggedIn()
+      .subscribe(res => {
+        if(!!res) {
+          this.getMe()
+            .subscribe(
+              res => {
+                console.log(res);
+              }
+            );
 
-      // Once the delay time from above is
-      // reached, get a new JWT and schedule
-      // additional refreshes
-      source.subscribe(() => {
-        this.getNewJwt()
-          .subscribe(res => {
-            this.scheduleRefresh();
+          let source = this.authHttp.tokenStream.flatMap(
+            token => {
+              // Get the expiry time to generate
+              // a delay in milliseconds
+              let now: number = new Date().valueOf();
+              let jwtExp: number = this.jwtHelper.decodeToken(token).exp;
+              let exp: Date = new Date(0);
+              exp.setUTCSeconds(jwtExp);
+              let delay: number = exp.valueOf() - now;
+
+              // Use the delay in a timer to
+              // run the refresh at the proper time
+              return Observable.timer(delay);
+            });
+
+          // Once the delay time from above is
+          // reached, get a new JWT and schedule
+          // additional refreshes
+          source.subscribe(() => {
+            this.getNewJwt()
+              .subscribe(res => {
+                this.scheduleRefresh();
+              });
           });
+        }
       });
-    }
   }
 
   private unscheduleRefresh() {
@@ -157,6 +192,7 @@ export class AuthenticationService {
 
   private setTokens(token, refreshToken): void {
     this.token = token;
+    this.refreshToken = refreshToken;
 
     localStorage.setItem('id_token', token);
     localStorage.setItem('refresh_token', refreshToken);

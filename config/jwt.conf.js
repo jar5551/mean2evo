@@ -3,8 +3,6 @@
  */
 
 export default (passportJWT) => {
-  console.log('passportJWT', process.env);
-
   return {
     jwtFromRequest: passportJWT.ExtractJwt.fromAuthHeader(),
     secretOrKey: process.env.ACCESS_TOKEN_SECRET,
