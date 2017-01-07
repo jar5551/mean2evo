@@ -1,7 +1,9 @@
 import {Injectable} from '@angular/core';
 import {Http} from '@angular/http';
 import {Observable} from 'rxjs/Rx';
-import {tokenNotExpired, AuthHttp, JwtHelper} from 'angular2-jwt';
+import {tokenNotExpired, JwtHelper} from 'angular2-jwt';
+import {AuthHttp} from './auth-http.service';
+
 import {ReplaySubject} from 'rxjs';
 import {Router} from '@angular/router';
 
@@ -55,6 +57,10 @@ export class AuthenticationService {
     localStorage.removeItem('id_token');
     localStorage.removeItem('refresh_token');
     this.unscheduleRefresh();
+  }
+
+  private isStoredTokens() {
+    return localStorage.getItem('id_token') && localStorage.getItem('refresh_token');
   }
 
   public loggedIn(): Observable<boolean> {

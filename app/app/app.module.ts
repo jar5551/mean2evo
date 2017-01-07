@@ -3,9 +3,9 @@ import {NgModule} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {HttpModule} from '@angular/http';
 import {MaterialModule} from '@angular/material';
-import {RouterModule} from '@angular/router';
+import {RouterModule, Router} from '@angular/router';
 import {FlexLayoutModule} from "@angular/flex-layout";
-import {AuthHttp, JwtHelper} from 'angular2-jwt';
+import {JwtHelper, AuthConfig} from 'angular2-jwt';
 import {Http} from '@angular/http';
 
 import {AppComponent} from './app.component';
@@ -21,9 +21,11 @@ import {AuthenticationService} from './services/authentication.service';
 import {AdminPostsComponent} from './components/admin/admin-posts/admin-posts.component';
 import {AdminUsersComponent} from './components/admin/admin-users/admin-users.component';
 
-import {AuthHttpService} from './services/auth-http.service';
+import {AuthHttpConfigService} from './services/auth-http-config.service';
 import {TruncateTextPipe} from './pipes/truncate-text.pipe';
 import {AdminPostsFormComponent} from './components/admin/admin-posts/admin-posts-form.component';
+
+import {AuthHttp} from './services/auth-http.service';
 
 @NgModule({
   declarations: [
@@ -51,8 +53,8 @@ import {AdminPostsFormComponent} from './components/admin/admin-posts/admin-post
     AuthenticationService,
     {
       provide: AuthHttp,
-      useFactory: AuthHttpService,
-      deps: [Http]
+      useFactory: AuthHttpConfigService,
+      deps: [Http, Router]
     }
   ],
   entryComponents: [AdminPostsFormComponent],

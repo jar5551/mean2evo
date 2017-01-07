@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {AuthenticationService} from './../../../services/authentication.service';
+import {AuthenticationService} from 'app/services/authentication.service';
 
 @Component({
   selector: 'app-client-home',
@@ -9,13 +9,22 @@ import {AuthenticationService} from './../../../services/authentication.service'
 })
 export class ClientHomeComponent implements OnInit {
 
-  constructor(private authenticationService: AuthenticationService) { }
+  public loggedIn: boolean = false;
+
+  constructor(private authenticationService: AuthenticationService) {
+    this.authenticationService.loggedIn()
+      .subscribe(
+        res => {
+          this.loggedIn = !!res;
+        }
+      );
+  }
 
   ngOnInit() {
   }
 
-  loggedIn() {
+  /*loggedIn() {
     //return this.authenticationService.loggedIn();
-  }
+  }*/
 
 }

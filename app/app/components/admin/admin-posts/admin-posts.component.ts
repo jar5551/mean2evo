@@ -27,13 +27,13 @@ export class AdminPostsComponent implements OnInit {
     };
 
     this.adminPostsService.getPosts()
-      .subscribe(res => {
+      .subscribe(
+        res => {
           this.items = res;
+          this.handleCompleteLoading();
         },
         err => {
           console.log(err);
-        },
-        () => {
           this.handleCompleteLoading();
         });
 

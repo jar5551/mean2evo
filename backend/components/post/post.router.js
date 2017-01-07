@@ -7,6 +7,7 @@ import Post from './post.model';
 export default (app, router) => {
   router.route('/posts')
     .get((req, res) => {
+      //res.status(404).send('aaa'); //for testing purposes only
 
       Post.find()
         .then(posts => {
