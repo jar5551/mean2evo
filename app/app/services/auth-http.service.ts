@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import {Injectable, Injector} from '@angular/core';
 import {Http, Request, Response, RequestOptionsArgs} from '@angular/http';
 import {Router} from '@angular/router';
 import {AuthHttp as JwtAuthHttp, AuthConfig} from 'angular2-jwt';
@@ -16,8 +16,10 @@ export class AuthHttp extends JwtAuthHttp {
   request(url: string | Request, options?: RequestOptionsArgs): Observable<Response> {
     let response = super.request(url, options);
 
+    console.log('request');
+
     return response.catch(res => {
-      console.log(res);
+      console.log('request catch', res);
       if (this.isUnauthorized(res.status)) {
         //TODO check is any posibility to use here AuthenticationService, because for now it causes errors
         localStorage.removeItem('id_token');

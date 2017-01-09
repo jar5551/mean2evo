@@ -66,7 +66,7 @@ export class AuthenticationService {
   public loggedIn(): Observable<boolean> {
     let resultSubject = new ReplaySubject(1);
 
-    console.log('loggedIn?', localStorage.getItem('id_token'), !tokenNotExpired());
+    //console.log('loggedIn?', localStorage.getItem('id_token'), !tokenNotExpired());
 
     if (!tokenNotExpired() && tokenNotExpired(null, localStorage.getItem('refresh_token'))) {
       this.getNewJwt()
