@@ -66,12 +66,13 @@ export class AuthenticationService {
   public loggedIn(): Observable<boolean> {
     let resultSubject = new ReplaySubject(1);
 
+    console.log('loggedIn?', localStorage.getItem('id_token'), !tokenNotExpired());
+
     if (!tokenNotExpired() && tokenNotExpired(null, localStorage.getItem('refresh_token'))) {
       this.getNewJwt()
         .subscribe(
           res => {
-            console.log('res', res);
-            if (!res || res.status !== 200) {
+            if (!res || !res.token || !res.refresh) {
               return this.logout()
                 .subscribe();
             }
