@@ -16,7 +16,7 @@ export class AuthHttp extends JwtAuthHttp {
   request(url: string | Request, options?: RequestOptionsArgs): Observable<Response> {
     let response = super.request(url, options);
 
-    console.log('request');
+    console.log('request', response);
 
     return response.catch(res => {
       console.log('request catch', res);
@@ -25,7 +25,7 @@ export class AuthHttp extends JwtAuthHttp {
         localStorage.removeItem('id_token');
         localStorage.removeItem('refresh_token');
         this.router.navigate(['/admin/login']);
-        return null;
+        return response;
       }
     });
   }

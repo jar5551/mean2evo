@@ -7,6 +7,6 @@ import {Router} from '@angular/router';
 export function AuthHttpConfigService(http: Http, router: Router) {
   return new AuthHttp(new AuthConfig({
     headerPrefix: 'JWT',
-    noJwtError: false,
+    noJwtError: true,
   }), http, router);
 }
