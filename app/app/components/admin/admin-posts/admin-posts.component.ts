@@ -27,8 +27,6 @@ export class AdminPostsComponent implements OnInit {
       icon: 'note'
     };
 
-    this.openSnackBar('wiadomość', 'akcja');
-
     this.adminPostsService.getPosts()
       .subscribe(
         res => {
