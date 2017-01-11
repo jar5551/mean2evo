@@ -16,4 +16,11 @@ export class AdminPostsService {
       });
   }
 
+  createPost(data) {
+    return this.authHttp.post('/api/posts', data)
+      .map(res => {
+        return res.json();
+      });
+  }
+
 }

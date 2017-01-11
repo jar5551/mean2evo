@@ -12,7 +12,7 @@ export default (app, router, passport) => {
     next();
   });
 
-  postRoutes(app, router);
+  postRoutes(app, router, passport);
   userRoutes(app, router, passport);
   authenticationRoutes(app, router, passport);
 

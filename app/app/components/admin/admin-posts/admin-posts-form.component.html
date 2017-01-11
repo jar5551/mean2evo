@@ -1,3 +1,23 @@
 <div class="dialog">
-    <p>diadlog</p>
+    <header>
+        <h3 md-dialog-title>{{data.title}}</h3>
+        <button md-button (click)="closeDialog()">
+            <md-icon>clear</md-icon>
+        </button>
+    </header>
+
+    <md-input-container class="input-full-width">
+        <input md-input placeholder="Title" [(ngModel)]="model.title">
+    </md-input-container>
+
+    <md-input-container class="input-full-width">
+        <textarea md-input placeholder="Content" [(ngModel)]="model.content"></textarea>
+    </md-input-container>
+
+    <md-slide-toggle [(ngModel)]="model.isPublic">Public post</md-slide-toggle>
+
+    <md-dialog-actions>
+        <button md-button (click)="closeDialog()">{{data.buttons.cancel}}</button>
+        <button md-button (click)="createPost()">{{data.buttons.ok}}</button>
+    </md-dialog-actions>
 </div>

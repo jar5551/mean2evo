@@ -1,9 +1,28 @@
 @import "../../../shared/styles/main";
 
 .dialog {
-  @include position(absolute, 0 0 0 0);
-  margin: auto;
-  width: 200px;
-  height: 200px;
-  background-color: $cWhite;
+  @include position(relative);
+  min-width: 600px;
+  padding-top: 3em;
+
+  .input-full-width {
+    width: 100%;
+  }
+
+  header {
+    @include position(absolute, -24px -24px null -24px);
+    height: 3em;
+    line-height: 3em;
+    padding: 0 24px;
+    background-color: $cPrimary;
+    color: $cWhite;
+
+    h2 {
+
+    }
+
+    button {
+      @include position(absolute, 0 0 0 null);
+    }
+  }
 }

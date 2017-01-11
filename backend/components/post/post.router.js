@@ -4,7 +4,7 @@
 
 import Post from './post.model';
 
-export default (app, router) => {
+export default (app, router, passport) => {
   router.route('/posts')
     .get((req, res) => {
       //res.status(404).send('aaa'); //for testing purposes only
@@ -18,17 +18,8 @@ export default (app, router) => {
         })
     })
 
-    .post((req, res) => {
-      let posts = [];
-
-      for (var i = 0; i < 20; i++) {
-        posts.push({
-          title: 'Post ' + i,
-          content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed et erat elementum, fermentum diam in, blandit est. Pellentesque viverra, urna ut tempus blandit, neque felis sagittis massa, eget dignissim dolor leo at metus.'
-        })
-      }
-
-      Post.create(posts)
+    .post(passport.authenticate('jwt', {session: false}), (req, res) => {
+      Post.create(req.body)
         .then(posts => {
           console.log('created', posts);
           return res.send(posts);

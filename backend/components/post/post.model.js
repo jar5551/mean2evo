@@ -4,8 +4,10 @@
 import mongoose from 'mongoose';
 
 let postSchema = new mongoose.Schema({
-  title: { type: String },
-  content: { type : String }
+  title: {type: String, required: true},
+  content: {type: String, required: true},
+  isPublic: {type: Boolean, default: false},
+  author: {type: mongoose.Schema.ObjectId}
 });
 
 // Expose the model so that it can be imported and used in

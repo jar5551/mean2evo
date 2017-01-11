@@ -7,14 +7,12 @@
     <div class="loading" [hidden]="!loading">
         <md-spinner></md-spinner>
     </div>
-    <md-list-item *ngFor="let item of items">
+    <md-list-item *ngFor="let item of items" (click)="editPost(item._id)">
         <md-icon md-list-avatar>{{templateConfig.icon}}</md-icon>
         <h4 md-line>{{item.title}}</h4>
         <p md-line>{{item.content | truncateText:80}}</p>
     </md-list-item>
 </md-list>
-
-<app-admin-posts-form [hidden]="true"></app-admin-posts-form>
 
 <!--
 <div id="dialog-form" title="Create new user">

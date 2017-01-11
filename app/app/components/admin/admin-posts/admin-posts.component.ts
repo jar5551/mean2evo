@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {AdminPostsService} from './admin-posts.service';
-import {MdDialog} from '@angular/material';
+import {MdDialog, MdSnackBar} from '@angular/material';
 import {AdminPostsFormComponent} from './admin-posts-form.component';
 
 @Component({
@@ -17,7 +17,8 @@ export class AdminPostsComponent implements OnInit {
   public templateConfig: Object;
 
   constructor(private adminPostsService: AdminPostsService,
-              public dialog: MdDialog) {
+              public dialog: MdDialog,
+              public snackBar: MdSnackBar) {
   }
 
   ngOnInit() {
@@ -25,6 +26,8 @@ export class AdminPostsComponent implements OnInit {
       title: 'Posts',
       icon: 'note'
     };
+
+    this.openSnackBar('wiadomość', 'akcja');
 
     this.adminPostsService.getPosts()
       .subscribe(
@@ -44,13 +47,50 @@ export class AdminPostsComponent implements OnInit {
   }
 
   newPost() {
-    console.log('open new post dialog');
-    //this.dialog.open(AdminPostsFormComponent);
+    let data = {
+      title: 'Add new post',
+      buttons: {
+        ok: 'Create',
+        cancel: 'Cancel'
+      }
+    };
 
-    let dialogRef = this.dialog.open(AdminPostsFormComponent);
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
+    this.openDialog(data);
+  }
 
+  editPost(id) {
+    let data = {
+      title: 'Edit post',
+      buttons: {
+        ok: 'Edit',
+        cancel: 'Cancel'
+      }
+    };
+
+    this.openDialog(data);
+  }
+
+  private openDialog(data) {
+    const dialogCfg = {
+      disableClose: true
+    };
+
+    let dialogRef = this.dialog.open(AdminPostsFormComponent, dialogCfg);
+
+    dialogRef.componentInstance.data = data;
+
+    dialogRef.afterClosed().subscribe(res => {
+      console.log(res);
+      if(res.status === 'created' && res.post) {
+        this.items.push(res.post);
+        this.openSnackBar('Post has been created', 'OK');
+      }
+    });
+  }
+
+  private openSnackBar(message, action) {
+    this.snackBar.open(message, action, {
+      duration: 3000,
     });
   }
 

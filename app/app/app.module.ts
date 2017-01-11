@@ -38,7 +38,7 @@ import {AuthHttp} from './services/auth-http.service';
     AdminUsersComponent,
     TruncateTextPipe,
     AdminPostsFormComponent
-],
+  ],
   imports: [
     BrowserModule,
     FormsModule,
