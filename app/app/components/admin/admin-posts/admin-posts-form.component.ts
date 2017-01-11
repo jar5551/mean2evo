@@ -18,16 +18,32 @@ export class AdminPostsFormComponent {
   public model = {
     title: '',
     content: '',
-    isPublic: ''
+    isPublic: false
   };
 
-  constructor(public dialogRef: MdDialogRef<AdminPostsFormComponent>, private adminPostsService: AdminPostsService) { }
+  constructor(public dialogRef: MdDialogRef<AdminPostsFormComponent>,
+              private adminPostsService: AdminPostsService) { }
 
   ngOnInit() {
   }
 
   createPost() {
-    console.log('createPost');
+    console.log('createPost', this.model);
+
+    /*if(!this.model._id) {
+
+    } else {
+      this.adminPostsService.updatePost(this.model._id, this.model)
+        .subscribe(res => {
+          this.dialogRef.close({
+            status: 'updated',
+            post: res
+          });
+        }, err => {
+          this.handleError(err);
+        });
+    }*/
+
     this.adminPostsService.createPost(this.model)
       .subscribe(
         res => {

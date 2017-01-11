@@ -1,6 +1,5 @@
 import {Injectable} from '@angular/core';
 import {AuthHttp} from 'app/services/auth-http.service';
-
 import {Observable} from 'rxjs/Rx';
 
 @Injectable()
@@ -16,6 +15,13 @@ export class AdminPostsService {
       });
   }
 
+  getPost(id) {
+    return this.authHttp.get('/api/posts/' + id)
+      .map(res => {
+        return res.json();
+      })
+  }
+
   createPost(data) {
     return this.authHttp.post('/api/posts/all', data)
       .map(res => {
@@ -23,4 +29,10 @@ export class AdminPostsService {
       });
   }
 
+  updatePost(id, data) {
+    return this.authHttp.put('/api/posts/' + id, data)
+      .map(res => {
+        return res.json();
+      })
+  }
 }

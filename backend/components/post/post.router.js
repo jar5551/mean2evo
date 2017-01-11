@@ -35,10 +35,38 @@ export default (app, router, passport) => {
       Post.create(req.body)
         .then(posts => {
           console.log('created', posts);
-          return res.send(posts);
+          res.send(posts);
         })
         .catch(err => {
-          return res.send(err);
+          res.send(err);
         });
+    });
+
+  router.route('/posts/:id')
+    .get(passport.authenticate('jwt', {session: false}), (req, res) => {
+      Post.findById(req.params.id)
+        .then(post => {
+          res.json(post);
+        })
+        .catch(err => {
+          res.send(err);
+        })
+    })
+    .put(passport.authenticate('jwt', {session: false}), (req, res) => {
+      Post.findById(req.params.id)
+        .then(post => {
+          post.title = req.body.title;
+          post.content = req.body.content;
+          post.isPublic = req.body.isPublic;
+
+          post.save()
+            .then(res => {
+              res.json(res);
+            })
+            .catch(err => {
+              res.send(err);
+            })
+
+        })
     });
 }

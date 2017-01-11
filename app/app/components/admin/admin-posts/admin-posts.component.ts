@@ -53,7 +53,15 @@ export class AdminPostsComponent implements OnInit {
       }
     };
 
-    this.openDialog(data);
+    let dialogRef = this.openDialog(data);
+
+    dialogRef.afterClosed().subscribe(res => {
+      console.log(res);
+      if(res.status === 'created' && res.post) {
+        this.items.push(res.post);
+        this.openSnackBar('Post has been created', 'OK');
+      }
+    });
   }
 
   editPost(id) {
@@ -65,10 +73,24 @@ export class AdminPostsComponent implements OnInit {
       }
     };
 
-    this.openDialog(data);
+    this.adminPostsService.getPost(id)
+      .subscribe(res => {
+        let post = res;
+        console.log(post);
+
+        let dialogRef = this.openDialog(data, post);
+
+        dialogRef.afterClosed().subscribe(res => {
+          console.log(res);
+          if(res.status === 'updated' && res.post) {
+            //this.items.push(res.post);
+            this.openSnackBar('Post has been updated', 'OK');
+          }
+        });
+      });
   }
 
-  private openDialog(data) {
+  private openDialog(data, model?) {
     const dialogCfg = {
       disableClose: true
     };
@@ -77,13 +99,11 @@ export class AdminPostsComponent implements OnInit {
 
     dialogRef.componentInstance.data = data;
 
-    dialogRef.afterClosed().subscribe(res => {
-      console.log(res);
-      if(res.status === 'created' && res.post) {
-        this.items.push(res.post);
-        this.openSnackBar('Post has been created', 'OK');
-      }
-    });
+    if(model) {
+      dialogRef.componentInstance.model = model;
+    }
+
+    return dialogRef;
   }
 
   private openSnackBar(message, action) {

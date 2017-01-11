@@ -1,7 +1,7 @@
 <md-toolbar color="primary">
     <span>Mongo, ExpressJS, Anular 2, NodeJS - Starter Pack</span>
     <span class="spacer"></span>
-    <md-icon class="icon">favorite</md-icon>
+    <!--<md-icon class="icon">favorite</md-icon>
     <md-icon class="icon">delete</md-icon>
 
     <button md-icon-button [mdMenuTriggerFor]="menu">
@@ -20,9 +20,23 @@
             <md-icon>notifications_off</md-icon>
             <span>Disable alerts</span>
         </button>
-    </md-menu>
+    </md-menu>-->
+    <a routerLink="/admin/login" *ngIf="!loggedIn" md-raised-button color="accent">Login</a>
+    <a routerLink="/admin/dashboard" *ngIf="loggedIn" md-raised-button color="accent">Back to app</a>
 </md-toolbar>
 
+<h1>
+    Public posts
+</h1>
 
-<a routerLink="/admin/login" routerLinkActive="active" *ngIf="!loggedIn">Login to Digital Dashboard</a>
-<a routerLink="/admin/dashboard" *ngIf="loggedIn">DASHBOARD</a>
+<md-card class="post-card" *ngFor="let post of posts">
+    <md-card-header>
+        <div md-card-avatar class="example-header-image"></div>
+        <md-card-title>{{post.title}}</md-card-title>
+    </md-card-header>
+    <md-card-content>
+        <p>
+            {{post.content}}
+        </p>
+    </md-card-content>
+</md-card>
