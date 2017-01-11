@@ -10,14 +10,14 @@ export class AdminPostsService {
   }
 
   getPosts() {
-    return this.authHttp.get('/api/posts')
+    return this.authHttp.get('/api/posts/all')
       .map(res => {
         return res.json();
       });
   }
 
   createPost(data) {
-    return this.authHttp.post('/api/posts', data)
+    return this.authHttp.post('/api/posts/all', data)
       .map(res => {
         return res.json();
       });

@@ -9,6 +9,19 @@ export default (app, router, passport) => {
     .get((req, res) => {
       //res.status(404).send('aaa'); //for testing purposes only
 
+      Post.find({
+        isPublic: true
+      })
+        .then(posts => {
+          res.json(posts);
+        })
+        .catch(err => {
+          res.send(err);
+        })
+    });
+
+  router.route('/posts/all')
+    .get(passport.authenticate('jwt', {session: false}), (req, res) => {
       Post.find()
         .then(posts => {
           res.json(posts);
