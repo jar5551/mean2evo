@@ -22,7 +22,9 @@
     }
 
     button {
-      @include position(absolute, 0 0 0 null);
+      @include position(absolute, 0 24px 0 null);
+      padding: 0;
+      min-width: 0;
     }
   }
 }

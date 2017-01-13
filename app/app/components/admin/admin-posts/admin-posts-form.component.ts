@@ -16,6 +16,7 @@ export class AdminPostsFormComponent {
   };
 
   public model = {
+    _id: null,
     title: '',
     content: '',
     isPublic: false
@@ -27,23 +28,25 @@ export class AdminPostsFormComponent {
   ngOnInit() {
   }
 
-  createPost() {
-    console.log('createPost', this.model);
-
-    /*if(!this.model._id) {
-
+  okDialog() {
+    if(!this.model._id) {
+      this.createPost();
     } else {
-      this.adminPostsService.updatePost(this.model._id, this.model)
-        .subscribe(res => {
-          this.dialogRef.close({
-            status: 'updated',
-            post: res
-          });
-        }, err => {
-          this.handleError(err);
-        });
-    }*/
+      this.updatePost();
+    }
+  }
 
+  closeDialog() {
+    this.dialogRef.close({
+      status: 'cancel'
+    });
+  }
+
+  private handleError(err): void {
+    console.log(err);
+  }
+
+  private createPost() {
     this.adminPostsService.createPost(this.model)
       .subscribe(
         res => {
@@ -58,14 +61,16 @@ export class AdminPostsFormComponent {
       );
   }
 
-  closeDialog() {
-    this.dialogRef.close({
-      status: 'cancel'
-    });
-  }
-
-  handleError(err): void {
-    console.log(err);
+  private updatePost() {
+    this.adminPostsService.updatePost(this.model._id, this.model)
+      .subscribe(res => {
+        this.dialogRef.close({
+          status: 'updated',
+          post: res
+        });
+      }, err => {
+        this.handleError(err);
+      });
   }
 
 

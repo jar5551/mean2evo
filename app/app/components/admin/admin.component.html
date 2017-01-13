@@ -7,6 +7,10 @@
             <md-icon>more_vert</md-icon>
         </button>
         <md-menu #menu="mdMenu">
+            <button md-menu-item routerLink="/">
+                <md-icon>home</md-icon>
+                <span>Home page</span>
+            </button>
             <button md-menu-item (click)="logout()">
                 <md-icon>power_settings_new</md-icon>
                 <span>Logout</span>

@@ -59,14 +59,13 @@ export default (app, router, passport) => {
           post.content = req.body.content;
           post.isPublic = req.body.isPublic;
 
-          post.save()
-            .then(res => {
-              res.json(res);
-            })
-            .catch(err => {
-              res.send(err);
-            })
+          try {
+            post.save();
+            res.json(post);
+          } catch(e) {
+            res.send(e);
 
+          }
         })
     });
 }

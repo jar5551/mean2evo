@@ -13,7 +13,7 @@ import {AdminPostsFormComponent} from './admin-posts-form.component';
 export class AdminPostsComponent implements OnInit {
 
   public items: Array<any>;
-  public loading: boolean = true;
+  public loading: boolean = true; //TODO create custom loading componet
   public templateConfig: Object;
 
   constructor(private adminPostsService: AdminPostsService,
@@ -56,7 +56,6 @@ export class AdminPostsComponent implements OnInit {
     let dialogRef = this.openDialog(data);
 
     dialogRef.afterClosed().subscribe(res => {
-      console.log(res);
       if(res.status === 'created' && res.post) {
         this.items.push(res.post);
         this.openSnackBar('Post has been created', 'OK');
@@ -76,14 +75,15 @@ export class AdminPostsComponent implements OnInit {
     this.adminPostsService.getPost(id)
       .subscribe(res => {
         let post = res;
-        console.log(post);
 
         let dialogRef = this.openDialog(data, post);
 
         dialogRef.afterClosed().subscribe(res => {
-          console.log(res);
           if(res.status === 'updated' && res.post) {
-            //this.items.push(res.post);
+            let index = this.getElementIndexInArrayById(this.items, id);
+
+            this.items[index] = res.post;
+
             this.openSnackBar('Post has been updated', 'OK');
           }
         });
@@ -110,6 +110,10 @@ export class AdminPostsComponent implements OnInit {
     this.snackBar.open(message, action, {
       duration: 3000,
     });
+  }
+
+  private getElementIndexInArrayById(array, id) {
+    return array.indexOf(array.find(element => element._id === id));
   }
 
 }
