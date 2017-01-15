@@ -2,15 +2,15 @@
     <button md-button (click)="newPost()">Add new</button>
 </header>
 
-<md-list>
+<md-list class="posts">
     <h3 md-subheader>{{templateConfig.title}}</h3>
     <div class="loading" [hidden]="!loading">
         <md-spinner></md-spinner>
     </div>
-    <md-list-item *ngFor="let item of items" (click)="editPost(item._id)">
+    <md-list-item *ngFor="let item of items" class="post">
         <md-icon md-list-avatar>{{templateConfig.icon}}</md-icon>
-        <h4 md-line>{{item.title}}</h4>
-        <p md-line>{{item.content | truncateText:80}}</p>
+        <h4 md-line><a href="#" (click)="editPost(item._id, $event)">{{item.title}}</a></h4>
+        <p md-line class="options"><a href="#" (click)="editPost(item._id, $event)">Edit</a> | <a href="#" (click)="moveToTrash(item._id, $event)">Move to trash</a></p>
     </md-list-item>
 </md-list>
 

@@ -15,7 +15,7 @@ postSchema.statics.getPublicPosts = function() {
 };
 
 postSchema.statics.getAllPosts = function () {
-  return this.find();
+  return this.find().select('title');
 };
 
 postSchema.statics.getPost = function (id) {

@@ -63,7 +63,7 @@ export class AdminPostsComponent implements OnInit {
     });
   }
 
-  editPost(id) {
+  editPost(id, e) {
     let data = {
       title: 'Edit post',
       buttons: {
@@ -88,6 +88,18 @@ export class AdminPostsComponent implements OnInit {
           }
         });
       });
+
+    if(e != null) {
+      e.preventDefault();
+    }
+  }
+
+  moveToTrash(id, e) {
+    console.log('moveToTrash', id);
+
+    if(e != null) {
+      e.preventDefault();
+    }
   }
 
   private openDialog(data, model?) {

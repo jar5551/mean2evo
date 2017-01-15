@@ -16,10 +16,7 @@ export class AuthHttp extends JwtAuthHttp {
   request(url: string | Request, options?: RequestOptionsArgs): Observable<Response> {
     let response = super.request(url, options);
 
-    console.log('request', response);
-
     return response.catch(res => {
-      console.log('request catch', res);
       if (this.isUnauthorized(res.status)) {
         //TODO check is any posibility to use here AuthenticationService, because for now it causes errors
         localStorage.removeItem('id_token');

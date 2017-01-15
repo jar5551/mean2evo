@@ -8,3 +8,24 @@
     margin: auto;
   }
 }
+
+.posts {
+  .post {
+    a {
+      text-decoration: none;
+      color: $ct0;
+    }
+
+    .options {
+      @include transition(all 150ms ease);
+      opacity: 0;
+      padding-top: .5em;
+    }
+
+    &:hover {
+      .options {
+        opacity: 1;
+      }
+    }
+  }
+}
