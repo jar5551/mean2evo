@@ -7,22 +7,18 @@ import Post from './post.model';
 export default (app, router, passport) => {
   router.route('/posts')
     .get((req, res) => {
-      //res.status(404).send('aaa'); //for testing purposes only
-
-      Post.find({
-        isPublic: true
-      })
+      Post.getPublicPosts()
         .then(posts => {
           res.json(posts);
         })
         .catch(err => {
           res.send(err);
-        })
+        });
     });
 
   router.route('/posts/all')
     .get(passport.authenticate('jwt', {session: false}), (req, res) => {
-      Post.find()
+      Post.getAllPosts()
         .then(posts => {
           res.json(posts);
         })
@@ -32,7 +28,7 @@ export default (app, router, passport) => {
     })
 
     .post(passport.authenticate('jwt', {session: false}), (req, res) => {
-      Post.create(req.body)
+      Post.createPost(req.body)
         .then(posts => {
           console.log('created', posts);
           res.send(posts);
@@ -44,7 +40,7 @@ export default (app, router, passport) => {
 
   router.route('/posts/:id')
     .get(passport.authenticate('jwt', {session: false}), (req, res) => {
-      Post.findById(req.params.id)
+      Post.getPost(req.params.id)
         .then(post => {
           res.json(post);
         })
@@ -53,7 +49,7 @@ export default (app, router, passport) => {
         })
     })
     .put(passport.authenticate('jwt', {session: false}), (req, res) => {
-      Post.findById(req.params.id)
+      Post.getPost(req.params.id)
         .then(post => {
           post.title = req.body.title;
           post.content = req.body.content;
