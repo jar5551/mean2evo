@@ -7,11 +7,17 @@ const postSchema = new mongoose.Schema({
   title: {type: String, required: true},
   content: {type: String, required: true},
   isPublic: {type: Boolean, default: false},
-  author: {type: mongoose.Schema.ObjectId}
+  author: {type: mongoose.Schema.ObjectId, ref: 'User'},
+  createdDate: {type: Date, default: Date.now},
+  modifiedUser: {type: mongoose.Schema.ObjectId, ref: 'User'},
+  modifiedDate: {Type: Date},
+  trash: {type: Boolean, default: false},
+  trashDate: {type: Date},
+  trashUser: {type: mongoose.Schema.Types.ObjectId, ref: 'User'}
 });
 
 postSchema.statics.getPublicPosts = function() {
-  return this.find({isPublic: true});
+  return this.find({isPublic: true}).populate('author', 'username');
 };
 
 postSchema.statics.getAllPosts = function () {
@@ -19,10 +25,11 @@ postSchema.statics.getAllPosts = function () {
 };
 
 postSchema.statics.getPost = function (id) {
-  return this.findById(id);
+  return this.findById(id).populate('author', 'username');
 };
 
-postSchema.statics.createPost = function (data) {
+postSchema.statics.createPost = function (data, userId) {
+  data.author = userId;
   return this.create(data);
 };
 

@@ -121,14 +121,16 @@ export default (passport, passportJWT) => {
 
     console.log(jwt_payload);
 
+    let token = jwt.sign(jwt_payload, jwtOptions.secretOrKey);
+
     InvalidToken.find({
-      token: jwt.sign(jwt_payload, jwtOptions.secretOrKey)
+      token: token
     }, (err, docs) => {
       if (err) {
         return done(err, false);
       }
       if (!docs.length) {
-        User.findById(jwt_payload.id, (err, user) => {
+        User.findById(jwt_payload.id, 'username email' ,(err, user) => {
           if (err) {
             return done(err, false);
           }

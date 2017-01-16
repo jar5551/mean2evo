@@ -28,7 +28,7 @@ export default (app, router, passport) => {
     })
 
     .post(passport.authenticate('jwt', {session: false}), (req, res) => {
-      Post.createPost(req.body)
+      Post.createPost(req.body, req.user._id)
         .then(posts => {
           console.log('created', posts);
           res.send(posts);

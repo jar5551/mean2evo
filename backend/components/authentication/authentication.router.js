@@ -56,17 +56,19 @@ export default (app, router, passport) => {
     });
   });
 
-  router.get('/auth/me', passport.authenticate('jwt', {session: false}), tokenExtract, (req, res, next) => {
-    let id = req.jwtDecode.id;
+  router.get('/auth/me', passport.authenticate('jwt', {session: false}), (req, res, next) => {
 
-    User.findById(id, 'username email', (err, user) => {
+    console.log(req);
+
+    res.json(req.user);
+
+    /*User.findById(id, 'username email', (err, user) => {
       if (err)
         res.send(err);
       else {
         res.json({'user': user});
       }
-
-    });
+    });*/
   });
 
   router.post('/auth/refresh', (req, res, next) => {

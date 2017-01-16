@@ -14,6 +14,10 @@
         <textarea md-input placeholder="Content" [(ngModel)]="model.content" rows="8"></textarea>
     </md-input-container>
 
+    <md-input-container class="input-full-width">
+        <input md-input placeholder="Author:" disabled [(ngModel)]="model.author.username">
+    </md-input-container>
+
     <md-slide-toggle [(ngModel)]="model.isPublic">Public post</md-slide-toggle>
 
     <md-dialog-actions>
