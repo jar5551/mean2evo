@@ -1,7 +1,8 @@
+<app-loading-indicator></app-loading-indicator>
+
 <header>
     <button md-button (click)="newPost()">Add new</button>
 </header>
-
 <md-list class="posts">
     <h3 md-subheader>{{templateConfig.title}}</h3>
     <div class="loading" [hidden]="!loading">

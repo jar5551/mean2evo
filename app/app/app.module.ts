@@ -26,6 +26,8 @@ import {TruncateTextPipe} from './pipes/truncate-text.pipe';
 import {AdminPostsFormComponent} from './components/admin/admin-posts/admin-posts-form.component';
 
 import {AuthHttp} from './services/auth-http.service';
+import {LoadingService} from './components/shared/loading-indicator/loading.service';
+import {LoadingIndicatorComponent} from './components/shared/loading-indicator/loading-indicator.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +39,8 @@ import {AuthHttp} from './services/auth-http.service';
     AdminPostsComponent,
     AdminUsersComponent,
     TruncateTextPipe,
-    AdminPostsFormComponent
+    AdminPostsFormComponent,
+    LoadingIndicatorComponent
   ],
   imports: [
     BrowserModule,
@@ -48,6 +51,7 @@ import {AuthHttp} from './services/auth-http.service';
     RouterModule.forRoot(appRoutes)
   ],
   providers: [
+    LoadingService,
     JwtHelper,
     AuthGuardService,
     AuthenticationService,

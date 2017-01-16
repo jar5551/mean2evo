@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {AdminPostsService} from './admin-posts.service';
 import {MdDialog, MdSnackBar} from '@angular/material';
 import {AdminPostsFormComponent} from './admin-posts-form.component';
+import {LoadingService} from 'app/components/shared/loading-indicator/loading.service';
 
 @Component({
   selector: 'app-admin-posts',
@@ -18,10 +19,13 @@ export class AdminPostsComponent implements OnInit {
 
   constructor(private adminPostsService: AdminPostsService,
               public dialog: MdDialog,
-              public snackBar: MdSnackBar) {
+              public snackBar: MdSnackBar,
+              private loadingService: LoadingService) {
   }
 
   ngOnInit() {
+    this.loadingService.toggleLoadingIndicator(true);
+
     this.templateConfig = {
       title: 'Posts',
       icon: 'note'
@@ -56,7 +60,7 @@ export class AdminPostsComponent implements OnInit {
     let dialogRef = this.openDialog(data);
 
     dialogRef.afterClosed().subscribe(res => {
-      if(res.status === 'created' && res.post) {
+      if (res.status === 'created' && res.post) {
         this.items.push(res.post);
         this.openSnackBar('Post has been created', 'OK');
       }
@@ -79,17 +83,17 @@ export class AdminPostsComponent implements OnInit {
         let dialogRef = this.openDialog(data, post);
 
         dialogRef.afterClosed().subscribe(res => {
-          if(res.status === 'updated' && res.post) {
+          if (res.status === 'updated' && res.post) {
             let index = this.getElementIndexInArrayById(this.items, id);
 
-            this.items[index] = res.post;
+            this.items[index].title = res.post.title;
 
             this.openSnackBar('Post has been updated', 'OK');
           }
         });
       });
 
-    if(e != null) {
+    if (e != null) {
       e.preventDefault();
     }
   }
@@ -97,7 +101,7 @@ export class AdminPostsComponent implements OnInit {
   moveToTrash(id, e) {
     console.log('moveToTrash', id);
 
-    if(e != null) {
+    if (e != null) {
       e.preventDefault();
     }
   }
@@ -111,7 +115,7 @@ export class AdminPostsComponent implements OnInit {
 
     dialogRef.componentInstance.data = data;
 
-    if(model) {
+    if (model) {
       dialogRef.componentInstance.model = model;
     }
 

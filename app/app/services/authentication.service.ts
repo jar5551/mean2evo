@@ -133,7 +133,7 @@ export class AuthenticationService {
           this.getMe()
             .subscribe(
               res => {
-                console.log(res);
+                this.setUserData(res);
               }
             );
 
@@ -203,5 +203,9 @@ export class AuthenticationService {
 
     localStorage.setItem('id_token', token);
     localStorage.setItem('refresh_token', refreshToken);
+  }
+
+  private setUserData(data): void {
+    localStorage.setItem('current_user', JSON.stringify(data));
   }
 }
