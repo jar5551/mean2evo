@@ -33,6 +33,10 @@ postSchema.statics.createPost = function (data, userId) {
   return this.create(data);
 };
 
+postSchema.statics.trashPost = function (id, userId) {
+  return this.findById(id).populate('author', 'username');
+};
+
 // Expose the model so that it can be imported and used in
 // the controller (to search, delete, etc.)
 export default mongoose.model('Post', postSchema);

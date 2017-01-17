@@ -63,5 +63,15 @@ export default (app, router, passport) => {
 
           }
         })
-    });
+    })
+    .delete(passport.authenticate('jwt', {session: false}), (req, res) => {
+      Post.trashPost(req.params.id, req.user._id)
+        .then(res => {
+          res.send(res);
+        })
+        .catch(err => {
+          res.json({'err': err});
+        })
+    })
+  ;
 }

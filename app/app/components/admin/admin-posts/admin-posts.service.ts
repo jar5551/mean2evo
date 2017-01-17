@@ -35,4 +35,11 @@ export class AdminPostsService {
         return res.json();
       })
   }
+
+  trashPost(id) {
+    return this.authHttp.delete('/api/post/' + id)
+      .map(res => {
+        return res.json();
+      })
+  }
 }

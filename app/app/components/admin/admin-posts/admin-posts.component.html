@@ -1,13 +1,11 @@
-<app-loading-indicator></app-loading-indicator>
-
 <header>
     <button md-button (click)="newPost()">Add new</button>
 </header>
 <md-list class="posts">
     <h3 md-subheader>{{templateConfig.title}}</h3>
-    <div class="loading" [hidden]="!loading">
+    <!--<div class="loading" [hidden]="!loading">
         <md-spinner></md-spinner>
-    </div>
+    </div>-->
     <md-list-item *ngFor="let item of items" class="post">
         <md-icon md-list-avatar>{{templateConfig.icon}}</md-icon>
         <h4 md-line><a href="#" (click)="editPost(item._id, $event)">{{item.title}}</a></h4>

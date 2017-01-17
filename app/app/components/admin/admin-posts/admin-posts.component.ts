@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {AdminPostsService} from './admin-posts.service';
 import {MdDialog, MdSnackBar} from '@angular/material';
 import {AdminPostsFormComponent} from './admin-posts-form.component';
-import {LoadingService} from 'app/components/shared/loading-indicator/loading.service';
+import {LoadingService} from './../../shared/loading-indicator/loading.service';
 
 @Component({
   selector: 'app-admin-posts',
@@ -14,7 +14,6 @@ import {LoadingService} from 'app/components/shared/loading-indicator/loading.se
 export class AdminPostsComponent implements OnInit {
 
   public items: Array<any>;
-  public loading: boolean = true; //TODO create custom loading componet
   public templateConfig: Object;
 
   constructor(private adminPostsService: AdminPostsService,
@@ -45,7 +44,7 @@ export class AdminPostsComponent implements OnInit {
   }
 
   handleCompleteLoading() {
-    this.loading = false;
+    this.loadingService.toggleLoadingIndicator(false);
   }
 
   newPost() {
@@ -68,6 +67,8 @@ export class AdminPostsComponent implements OnInit {
   }
 
   editPost(id, e) {
+    this.loadingService.toggleLoadingIndicator(true);
+
     let data = {
       title: 'Edit post',
       buttons: {
@@ -78,6 +79,8 @@ export class AdminPostsComponent implements OnInit {
 
     this.adminPostsService.getPost(id)
       .subscribe(res => {
+        this.loadingService.toggleLoadingIndicator(false);
+
         let post = res;
 
         let dialogRef = this.openDialog(data, post);
@@ -99,7 +102,13 @@ export class AdminPostsComponent implements OnInit {
   }
 
   moveToTrash(id, e) {
-    console.log('moveToTrash', id);
+    this.loadingService.toggleLoadingIndicator(true);
+
+    this.adminPostsService.trashPost(id)
+      .subscribe(res => {
+        this.loadingService.toggleLoadingIndicator(false);
+
+      });
 
     if (e != null) {
       e.preventDefault();

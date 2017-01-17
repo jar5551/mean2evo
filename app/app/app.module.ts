@@ -29,6 +29,7 @@ import {AuthHttp} from './services/auth-http.service';
 import {LoadingService} from './components/shared/loading-indicator/loading.service';
 import {LoadingIndicatorComponent} from './components/shared/loading-indicator/loading-indicator.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
