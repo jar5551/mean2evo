@@ -17,11 +17,11 @@ export class AdminUsersComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.loadingService.toggleLoadingIndicator(true);
+    this.loadingService.present();
 
     this.adminUsersService.getUsers()
       .subscribe(res => {
-        this.loadingService.toggleLoadingIndicator(false);
+        this.loadingService.dismiss();
 
         console.log(res);
         this.users = res;

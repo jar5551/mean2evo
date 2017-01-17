@@ -23,7 +23,7 @@ export class AdminPostsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.loadingService.toggleLoadingIndicator(true);
+    this.loadingService.present();
 
     this.templateConfig = {
       title: 'Posts',
@@ -44,7 +44,7 @@ export class AdminPostsComponent implements OnInit {
   }
 
   handleCompleteLoading() {
-    this.loadingService.toggleLoadingIndicator(false);
+    this.loadingService.dismiss();
   }
 
   newPost() {
@@ -67,7 +67,7 @@ export class AdminPostsComponent implements OnInit {
   }
 
   editPost(id, e) {
-    this.loadingService.toggleLoadingIndicator(true);
+    this.loadingService.present();
 
     let data = {
       title: 'Edit post',
@@ -79,7 +79,7 @@ export class AdminPostsComponent implements OnInit {
 
     this.adminPostsService.getPost(id)
       .subscribe(res => {
-        this.loadingService.toggleLoadingIndicator(false);
+        this.loadingService.dismiss();
 
         let post = res;
 
@@ -102,11 +102,11 @@ export class AdminPostsComponent implements OnInit {
   }
 
   moveToTrash(id, e) {
-    this.loadingService.toggleLoadingIndicator(true);
+    this.loadingService.present();
 
     this.adminPostsService.trashPost(id)
       .subscribe(res => {
-        this.loadingService.toggleLoadingIndicator(false);
+        this.loadingService.dismiss();
 
       });
 

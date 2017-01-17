@@ -8,8 +8,8 @@ export class LoadingService {
 
   //Source of solution: http://tombuyse.com/creating-a-loading-indicator-in-angular-2-ionic-2/
 
-  loading$: Observable<String>;
-  private _observer: Observer<String>;
+  loading$: Observable<Boolean>;
+  private _observer: Observer<Boolean>;
 
   constructor(private router: Router) {
     /*this.router.events.pairwise().subscribe(
@@ -25,12 +25,19 @@ export class LoadingService {
       observer => {
         this._observer = observer
       }).share();
-
   }
 
-  toggleLoadingIndicator(name) {
+  private toggleLoadingIndicator(value: Boolean) {
     if (this._observer) {
-      this._observer.next(name);
+      this._observer.next(value);
     }
+  }
+
+  present() {
+    this.toggleLoadingIndicator(true);
+  }
+
+  dismiss() {
+    this.toggleLoadingIndicator(false);
   }
 }
