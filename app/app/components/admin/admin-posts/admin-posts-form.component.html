@@ -14,7 +14,7 @@
         <textarea md-input placeholder="Content" [(ngModel)]="model.content" rows="8"></textarea>
     </md-input-container>
 
-    <md-input-container class="input-full-width">
+    <md-input-container class="input-full-width" *ngIf="model.author !== false">
         <input md-input placeholder="Author:" disabled [(ngModel)]="model.author.username">
     </md-input-container>
 

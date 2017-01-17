@@ -19,6 +19,7 @@ export class AdminPostsFormComponent {
     _id: null,
     title: '',
     content: '',
+    author: false,
     isPublic: false
   };
 
