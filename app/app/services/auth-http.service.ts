@@ -3,7 +3,6 @@ import {Http, Request, Response, RequestOptionsArgs} from '@angular/http';
 import {Router} from '@angular/router';
 import {AuthHttp as JwtAuthHttp, AuthConfig} from 'angular2-jwt';
 import {Observable} from 'rxjs/Observable';
-import {AuthenticationService} from './authentication.service';
 
 @Injectable()
 export class AuthHttp extends JwtAuthHttp {
@@ -22,7 +21,7 @@ export class AuthHttp extends JwtAuthHttp {
         localStorage.removeItem('id_token');
         localStorage.removeItem('refresh_token');
         this.router.navigate(['/admin/login']);
-        return response;
+        return res;
       }
     });
   }
