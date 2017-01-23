@@ -57,6 +57,12 @@ body {
   font-size: $fontSize;
 }
 
+button, .btn, a {
+  &:focus {
+    outline: 0;
+  }
+}
+
 * {
   -webkit-box-sizing: content-box;
   -moz-box-sizing: content-box;
@@ -66,7 +72,16 @@ body {
 app-root {
   #mainLoading {
     @include position(fixed, 0 0 0 0);
+    font-size: rem(24);
     height: 100%;
-    text-align: center;
+    font-weight: 300;
+
+    > div {
+      @include position(absolute, 0 0 0 0);
+      margin: auto;
+      height: 1em;
+      line-height: 1em;
+      text-align: center;
+    }
   }
 }

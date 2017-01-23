@@ -17,11 +17,11 @@ const postSchema = new mongoose.Schema({
 });
 
 postSchema.statics.getPublicPosts = function() {
-  return this.find({isPublic: true}).populate('author', 'username');
+  return this.find({isPublic: true, trash: false}).populate('author', 'username');
 };
 
 postSchema.statics.getAllPosts = function () {
-  return this.find().select('title');
+  return this.find({trash: false}).select('title');
 };
 
 postSchema.statics.getPost = function (id) {
