@@ -29,6 +29,10 @@ import {AuthHttp} from './services/auth-http.service';
 import {LoadingService} from './components/shared/loading-indicator/loading.service';
 import {LoadingIndicatorComponent} from './components/shared/loading-indicator/loading-indicator.component';
 
+//Import theme
+import { NgaModule } from './theme/nga.module';
+
+
 
 @NgModule({
   declarations: [
@@ -49,7 +53,8 @@ import {LoadingIndicatorComponent} from './components/shared/loading-indicator/l
     HttpModule,
     MaterialModule.forRoot(),
     FlexLayoutModule.forRoot(),
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    NgaModule.forRoot(),
   ],
   providers: [
     LoadingService,
