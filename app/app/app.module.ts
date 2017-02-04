@@ -26,8 +26,8 @@ import {TruncateTextPipe} from './pipes/truncate-text.pipe';
 import {AdminPostsFormComponent} from './admin/components/admin-posts/admin-posts-form.component';
 
 import {AuthHttp} from './services/auth-http.service';
-import {LoadingService} from './components/shared/loading-indicator/loading.service';
-import {LoadingIndicatorComponent} from './components/shared/loading-indicator/loading-indicator.component';
+import {LoadingService} from './components/loading-indicator/loading.service';
+import {LoadingIndicatorComponent} from './components/loading-indicator/loading-indicator.component';
 
 //Import theme
 import { NgaModule } from './theme/nga.module';
