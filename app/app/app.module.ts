@@ -11,23 +11,27 @@ import {Http} from '@angular/http';
 import {AppComponent} from './app.component';
 
 import {appRoutes} from './app.routing';
-import {AdminComponent} from './components/admin/admin.component';
-import {AdminLoginComponent} from './components/admin/admin-login/admin-login.component';
-import {ClientHomeComponent} from './components/client/client-home/client-home.component';
-import {AdminDashboardComponent} from './components/admin/admin-dashboard/admin-dashboard.component';
+import {AdminComponent} from './admin/components/admin.component';
+import {AdminLoginComponent} from './admin/components/admin-login/admin-login.component';
+import {ClientHomeComponent} from './client/components/client-home/client-home.component';
+import {AdminDashboardComponent} from './admin/components/admin-dashboard/admin-dashboard.component';
 
 import {AuthGuardService} from './services/auth-guard.service';
 import {AuthenticationService} from './services/authentication.service';
-import {AdminPostsComponent} from './components/admin/admin-posts/admin-posts.component';
-import {AdminUsersComponent} from './components/admin/admin-users/admin-users.component';
+import {AdminPostsComponent} from './admin/components/admin-posts/admin-posts.component';
+import {AdminUsersComponent} from './admin/components/admin-users/admin-users.component';
 
 import {AuthHttpConfigService} from './services/auth-http-config.service';
 import {TruncateTextPipe} from './pipes/truncate-text.pipe';
-import {AdminPostsFormComponent} from './components/admin/admin-posts/admin-posts-form.component';
+import {AdminPostsFormComponent} from './admin/components/admin-posts/admin-posts-form.component';
 
 import {AuthHttp} from './services/auth-http.service';
 import {LoadingService} from './components/shared/loading-indicator/loading.service';
 import {LoadingIndicatorComponent} from './components/shared/loading-indicator/loading-indicator.component';
+
+//Import theme
+import { NgaModule } from './theme/nga.module';
+import { GlobalState } from './global.state';
 
 
 @NgModule({
@@ -49,12 +53,14 @@ import {LoadingIndicatorComponent} from './components/shared/loading-indicator/l
     HttpModule,
     MaterialModule.forRoot(),
     FlexLayoutModule.forRoot(),
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    NgaModule.forRoot(),
   ],
   providers: [
     LoadingService,
     JwtHelper,
     AuthGuardService,
+    GlobalState,
     AuthenticationService,
     {
       provide: AuthHttp,

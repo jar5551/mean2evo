@@ -3,13 +3,13 @@
  */
 import {Routes} from '@angular/router';
 
-import {AdminComponent} from './components/admin/admin.component';
-import {AdminLoginComponent} from './components/admin/admin-login/admin-login.component';
-import {AdminDashboardComponent} from './components/admin/admin-dashboard/admin-dashboard.component';
-import {AdminPostsComponent} from './components/admin/admin-posts/admin-posts.component';
-import {AdminUsersComponent} from './components/admin/admin-users/admin-users.component';
+import {AdminComponent} from './admin/components/admin.component';
+import {AdminLoginComponent} from './admin/components/admin-login/admin-login.component';
+import {AdminDashboardComponent} from './admin/components/admin-dashboard/admin-dashboard.component';
+import {AdminPostsComponent} from './admin/components/admin-posts/admin-posts.component';
+import {AdminUsersComponent} from './admin/components/admin-users/admin-users.component';
 
-import {ClientHomeComponent} from './components/client/client-home/client-home.component';
+import {ClientHomeComponent} from './client/components/client-home/client-home.component';
 
 import {AuthGuardService} from './services/auth-guard.service';
 
