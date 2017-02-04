@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 
 import {SocketService} from './services/socket.service';
 import {SocketItem} from './models/socket-item.model';
+import {BaImageLoaderService, BaThemePreloader, BaThemeSpinner} from './theme/services';
 
 @Component({
   selector: 'app-root',
