@@ -1,3 +1,12 @@
+<!--<div class="widgets">
+
+    <div class="row">
+        <ba-card title="Basic Example" baCardClass="with-scroll">
+            <ng2-smart-table [settings]="settings" [source]="source" (deleteConfirm)="onDeleteConfirm($event)"></ng2-smart-table>
+        </ba-card>
+    </div>
+
+</div>-->
 
 
 
@@ -10,7 +19,6 @@
                     <table class="table table-bordered">
                         <thead>
                         <tr>
-                            <th class="browser-icons"></th>
                             <th>Title</th>
                             <th class="align-right">Visits</th>
                             <th class="align-right">Purchases</th>
@@ -19,7 +27,6 @@
                         </thead>
                         <tbody>
                         <tr *ngFor="let item of items">
-                            <td><img src="{{ ( item.image | baAppPicture )}}" width="20" height="20"></td>
                             <td ngClass="nowrap">{{ item.title }}</td>
                             <td class="align-right">{{ item.visits }}</td>
                             <td class="align-right">{{ item.purchases }}</td>
