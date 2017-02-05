@@ -74,12 +74,7 @@ export class AdminPostsComponent implements OnInit {
   constructor(private adminPostsService: AdminPostsService,
               public dialog: MdDialog,
               public snackBar: MdSnackBar,
-              protected service: SmartTablesService, //for smart tables
-              private loadingService: LoadingService) {
-    this.service.getData().then((data) => {
-      this.source.load(data);
-    });
-  }
+              private loadingService: LoadingService) {}
 
 
   // for smat tables
