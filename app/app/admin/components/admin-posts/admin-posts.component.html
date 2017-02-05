@@ -1,3 +1,40 @@
+
+
+
+<div class="widgets">
+
+    <div class="row">
+        <div class="col-lg-6 col-md-12">
+            <ba-card title="Hover Rows" baCardClass="with-scroll table-panel">
+                <div class="horizontal-scroll">
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th class="browser-icons"></th>
+                            <th>Browser</th>
+                            <th class="align-right">Visits</th>
+                            <th class="align-right">Purchases</th>
+                            <th class="align-right">%</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr *ngFor="let item of metricsTableData">
+                            <td><img src="{{ ( item.image | baAppPicture )}}" width="20" height="20"></td>
+                            <td ngClass="nowrap">{{ item.browser }}</td>
+                            <td class="align-right">{{ item.visits }}</td>
+                            <td class="align-right">{{ item.purchases }}</td>
+                            <td class="align-right">{{ item.percent }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </ba-card>
+        </div>
+    </div>
+
+</div>
+
+
 <header>
     <button md-button (click)="newPost()">Add new</button>
 </header>

@@ -1,6 +1,6 @@
-@import "./../../../shared/styles/main";
 
-.login-container {
+
+/*.login-container {
   @include linear-gradient(to right, $cBlue, $cGreen);
   height: 100%;
 
@@ -21,4 +21,6 @@
       }
     }
   }
-}
+}*/
+
+@import '../../../theme/sass/auth';
