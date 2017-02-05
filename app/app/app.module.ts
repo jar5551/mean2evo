@@ -29,6 +29,7 @@ import {AuthHttp} from './services/auth-http.service';
 import {LoadingService} from './components/loading-indicator/loading.service';
 import {LoadingIndicatorComponent} from './components/loading-indicator/loading-indicator.component';
 
+import {Ng2SmartTableModule } from 'ng2-smart-table';
 
 //Import theme
 import { NgaModule } from './theme/nga.module';
@@ -49,6 +50,7 @@ import { GlobalState } from './global.state';
     LoadingIndicatorComponent
   ],
   imports: [
+    Ng2SmartTableModule,
     BrowserModule,
     FormsModule,
     HttpModule,

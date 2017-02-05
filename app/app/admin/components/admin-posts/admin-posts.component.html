@@ -1,13 +1,13 @@
-<!--<div class="widgets">
+<div class="widgets">
 
     <div class="row">
         <ba-card title="Basic Example" baCardClass="with-scroll">
-            <ng2-smart-table [settings]="settings" [source]="source" (deleteConfirm)="onDeleteConfirm($event)"></ng2-smart-table>
+            <ng2-smart-table [settings]="settings" [source]="source"
+                             (deleteConfirm)="onDeleteConfirm($event)"></ng2-smart-table>
         </ba-card>
     </div>
 
-</div>-->
-
+</div>
 
 
 <div class="widgets">
@@ -53,7 +53,9 @@
     <md-list-item *ngFor="let item of items" class="post">
         <md-icon md-list-avatar>{{templateConfig.icon}}</md-icon>
         <h4 md-line><a href="#" (click)="editPost(item._id, $event)">{{item.title}}</a></h4>
-        <p md-line class="options"><a href="#" (click)="editPost(item._id, $event)">Edit</a> | <a href="#" (click)="moveToTrash(item._id, $event)">Move to trash</a></p>
+        <p md-line class="options"><a href="#" (click)="editPost(item._id, $event)">Edit</a> | <a href="#"
+                                                                                                  (click)="moveToTrash(item._id, $event)">Move
+            to trash</a></p>
     </md-list-item>
 </md-list>
 
