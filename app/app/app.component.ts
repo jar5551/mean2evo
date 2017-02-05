@@ -3,11 +3,15 @@ import {Component} from '@angular/core';
 import {SocketService} from './services/socket.service';
 import {SocketItem} from './models/socket-item.model';
 import {BaImageLoaderService, BaThemePreloader, BaThemeSpinner} from './theme/services';
+import { BaThemeConfig } from './theme/theme.config';
+import { layoutPaths } from './theme/theme.constants';
+
+import 'style-loader!./app.component.scss';
+import 'style-loader!./theme/initial.scss';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
   providers: [SocketService]
 })
 export class AppComponent {

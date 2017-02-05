@@ -11,16 +11,16 @@
                         <thead>
                         <tr>
                             <th class="browser-icons"></th>
-                            <th>Browser</th>
+                            <th>Title</th>
                             <th class="align-right">Visits</th>
                             <th class="align-right">Purchases</th>
                             <th class="align-right">%</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr *ngFor="let item of metricsTableData">
+                        <tr *ngFor="let item of items">
                             <td><img src="{{ ( item.image | baAppPicture )}}" width="20" height="20"></td>
-                            <td ngClass="nowrap">{{ item.browser }}</td>
+                            <td ngClass="nowrap">{{ item.title }}</td>
                             <td class="align-right">{{ item.visits }}</td>
                             <td class="align-right">{{ item.purchases }}</td>
                             <td class="align-right">{{ item.percent }}</td>
