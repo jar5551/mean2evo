@@ -33,6 +33,7 @@ import {LoadingIndicatorComponent} from './components/loading-indicator/loading-
 import {NgaModule} from './theme/nga.module';
 import {GlobalState} from './global.state';
 
+import {Ng2SmartTableModule} from 'ng2-smart-table';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,7 @@ import {GlobalState} from './global.state';
     MaterialModule.forRoot(),
     FlexLayoutModule.forRoot(),
     RouterModule.forRoot(appRoutes),
-    NgaModule.forRoot(),
+    NgaModule.forRoot()
   ],
   providers: [
     LoadingService,
