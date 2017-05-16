@@ -33,6 +33,7 @@ import {PrintComponent} from './components/print/print.component';
 import {ConfirmComponent} from './components/confirm/confirm.component';
 import {AlertComponent} from './components/alert/alert.component';
 import {AdminPostsComponent} from './components/admin-posts/admin-posts.component';
+import {WinnersComponent} from './components/winners/winners.component';
 
 
 @NgModule({
@@ -45,7 +46,8 @@ import {AdminPostsComponent} from './components/admin-posts/admin-posts.componen
     PrintComponent,
     ConfirmComponent,
     AlertComponent,
-    AdminPostsComponent
+    AdminPostsComponent,
+    WinnersComponent
   ],
   imports: [
     NgbModule.forRoot(),

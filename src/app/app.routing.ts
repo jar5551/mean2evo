@@ -5,7 +5,7 @@ import {AuthGuard} from './guards/auth.guard';
 import {DashboardComponent} from './components/dashboard/dashboard.component';
 import {MainComponent} from './components/main/main.component';
 import {AdminPostsComponent} from './components/admin-posts/admin-posts.component';
-
+import {WinnersComponent} from './components/winners/winners.component';
 
 export const appRoutes: Routes = [
   {
@@ -24,6 +24,10 @@ export const appRoutes: Routes = [
       {
         path: 'posts',
         component: AdminPostsComponent
+      },
+      {
+        path: 'zwyciezcy',
+        component: WinnersComponent
       }
     ]
   },

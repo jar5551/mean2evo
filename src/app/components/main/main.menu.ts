@@ -10,7 +10,7 @@ export const PAGES_MENU = [
         data: {
           menu: {
             title: 'Dashboard',
-            icon: 'ion-android-home',
+            icon: 'fa fa-home',
             selected: false,
             expanded: false,
             order: 0
@@ -18,11 +18,11 @@ export const PAGES_MENU = [
         }
       },
       {
-        path: 'posts',
+        path: 'zwyciezcy',
         data: {
           menu: {
-            title: 'Posty',
-            icon: 'ion-calendar',
+            title: 'Zwycięzcy',
+            icon: 'fa fa-trophy',
             selected: false,
             expanded: false,
             order: 250,
