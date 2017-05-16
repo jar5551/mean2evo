@@ -1,3 +1,7 @@
-<h1>
-  {{title}}
-</h1>
+<main [ngClass]="{'menu-collapsed': isMenuCollapsed}" baThemeRun>
+  <div class="additional-bg"></div>
+  <router-outlet></router-outlet>
+  <app-loading></app-loading>
+</main>
+<app-confirm></app-confirm>
+<app-alert></app-alert>

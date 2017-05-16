@@ -1,0 +1,5 @@
+<button type="submit" class="btn btn-success pull-right" (click)="print()" [disabled]="!data || !formAction">Drukuj</button>
+<form id="print" ngNoForm action="{{formAction}}" target="_blank" method="POST">
+  <input name="token" type="hidden" [(ngModel)]="token">
+  <input name="data" type="hidden" [(ngModel)]="data">
+</form>

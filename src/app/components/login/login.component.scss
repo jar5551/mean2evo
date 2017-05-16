@@ -1,0 +1,59 @@
+@import '../../theme/sass/auth';
+
+.auth-block {
+  position: relative;
+  padding: 1em 32px 32px 32px;
+
+  .login-img {
+    padding-bottom: 1em;
+  }
+
+  footer {
+    position: absolute;
+    bottom: 50px;
+    right: 34px;
+  }
+
+  h1 {
+    font-weight: 400;
+
+    span {
+      color: $primary;
+    }
+
+    sup {
+      font-size: .45em;
+      font-weight: 300;
+      top: -1.5em;
+    }
+  }
+
+  form {
+    &.disableForm {
+      opacity: .5;
+    }
+  }
+
+  .loading {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+    border-radius: 5px;
+
+    .fa {
+      $_iconSize: 40px;
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      margin: auto;
+      width: $_iconSize;
+      height: $_iconSize;
+      font-size: $_iconSize;
+    }
+  }
+}

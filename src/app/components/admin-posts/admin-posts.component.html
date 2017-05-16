@@ -1,0 +1,25 @@
+<div id="adminPosts">
+  <header class="pageHeader">
+    Posty
+  </header>
+  <table class="table table-bordered">
+    <thead>
+    <tr>
+      <th></th>
+      <th class="text-center">#</th>
+      <th>Title</th>
+      <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let item of items; let i = index">
+      <td></td>
+      <td class="text-center">{{i + 1}}</td>
+      <td>{{ item.title }}</td>
+      <td><a href="#" (click)="editPost(item._id, $event)"><i class="ion-edit"></i></a> <a href="#"
+                                                                                           (click)="moveToTrash(item._id, $event)"><i
+            class="ion-trash-a"></i></a></td>
+    </tr>
+    </tbody>
+  </table>
+</div>

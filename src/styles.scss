@@ -1,0 +1,107 @@
+/* You can add global styles to this file, and also import other style files */
+body, html {
+  height: 100%;
+}
+
+#rootLoading {
+}
+
+.table {
+  thead {
+    &.data-filters {
+
+      th {
+        line-height: 1em;
+        padding-bottom: 1.5em;
+
+        > span {
+          line-height: 2.2em;
+          height: 2.2em;
+          display: block;
+        }
+
+        .form-group {
+          position: relative;
+          margin-bottom: 0;
+          padding-right: 2em;
+
+          &:hover {
+            .form-control {
+              background-color: rgba(255, 255, 255, .2);
+
+              + .clear {
+                opacity: 1;
+              }
+            }
+          }
+
+          .clear {
+            position: absolute;
+            top: 0;
+            right: 3.5em;
+            bottom: 0;
+            margin: auto;
+            width: 12px;
+            height: 12px;
+            opacity: 0;
+            cursor: pointer;
+          }
+
+          .sort {
+            position: absolute;
+            top: 0;
+            right: .5em;
+            bottom: 0;
+            margin: auto;
+            cursor: pointer;
+            font-size: 1.5em;
+            line-height: 1.6em;
+          }
+
+          .form-control {
+            border-radius: 0;
+            background-color: transparent;
+            border-style: none;
+            color: #ffffff;
+            padding: 0 .5em;
+            margin-left: -.5em;
+            height: 2.2em;
+            font-weight: 400;
+            font-size: 1em;
+
+            &::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+              color: #ffffff;
+              font-weight: 700;
+            }
+            &:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+              color: #ffffff;
+              opacity:  1;
+              font-weight: 700;
+            }
+            &::-moz-placeholder { /* Mozilla Firefox 19+ */
+              color: #ffffff;
+              opacity:  1;
+              font-weight: 700;
+            }
+            &:-ms-input-placeholder { /* Internet Explorer 10-11 */
+              color: #ffffff;
+              font-weight: 700;
+            }
+
+            &:hover, &:focus {
+              background-color: rgba(255, 255, 255, .2);
+
+              + .clear {
+                opacity: 1;
+              }
+            }
+
+          }
+        }
+        span {
+
+        }
+      }
+    }
+  }
+}

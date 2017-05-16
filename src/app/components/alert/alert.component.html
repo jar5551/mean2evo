@@ -1,0 +1,18 @@
+<div class="alert" *ngIf="dialog.value">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">{{dialog.title}}</h4>
+        <button type="button" class="close" aria-label="Close" (click)="cancel()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>{{dialog.description}}</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="cancel()">OK</button>
+      </div>
+    </div>
+  </div>
+</div>
